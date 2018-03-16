@@ -47,7 +47,7 @@ services:
     volumes:
       - ./docker-postgresql-multiple-databases:/docker-entrypoint-initdb.d
     environment:
-      - POSTGRES_MULTIPLE_DATABASES=db1,db2
+      - POSTGRES_MULTIPLE_DATABASES=employees
     ports:
      - "5432:5432"
     environment:
