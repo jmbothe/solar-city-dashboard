@@ -3,12 +3,11 @@ package com.example.projectsapi.models;
 
 import javax.persistence.*;
 import lombok.*;
-
 import java.util.Date;
 
 @Data
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
-@Entity @Table(name = "EMPLOYEES")
+@Entity @Table(name = "PROJECTS")
 public class Project {
 
     @Id
