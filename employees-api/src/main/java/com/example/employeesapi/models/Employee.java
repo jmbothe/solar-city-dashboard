@@ -10,7 +10,8 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "EMPLOYEE_ID")
+    private Long employeeId;
 
     @Column(name = "FIRST_NAME")
     private String firstName;
@@ -27,13 +28,16 @@ public class Employee {
     @Column(name = "PASSWORD")
     private String password;
 
-    @Column(name = "REGION")
-    private Long region;
+    @OneToOne
+    @JoinColumn(name = "REGION_ID")
+    private Region region;
 
-    @Column(name = "POSITION")
-    private Long position;
+    @OneToOne
+    @JoinColumn(name = "POSITION_ID")
+    private Position position;
 
-    public Employee(String firstName, String lastName, String phoneNumber, String email, String password, Long region, Long position) {
+
+    public Employee(String firstName, String lastName, String phoneNumber, String email, String password, Region region, Position position) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;

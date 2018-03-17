@@ -2,6 +2,8 @@ package com.example.employeesapi.controllers;
 
 import com.example.employeesapi.models.Employee;
 import com.example.employeesapi.repositories.EmployeeRepository;
+import com.example.employeesapi.repositories.PositionRepository;
+import com.example.employeesapi.repositories.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,12 @@ public class EmployeesController {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private RegionRepository regionRepository;
+
+    @Autowired
+    private PositionRepository positionRepository;
 
     @GetMapping("/all")
     public Iterable<Employee> findAllEmployees() {

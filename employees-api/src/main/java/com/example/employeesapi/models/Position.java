@@ -5,17 +5,18 @@ import lombok.*;
 
 @Data
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
-@Entity @Table(name = "POSITION")
+@Entity @Table(name = "POSITIONS")
 public class Position {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "POSITION_ID")
     private Long id;
 
     @Column(name = "POSITION")
-    private String position;
+    private String name;
 
-    public Position(String position) {
-        this.position = position;
+    public Position(String name) {
+        this.name = name;
     }
 }
