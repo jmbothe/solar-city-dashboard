@@ -112,6 +112,10 @@ public class Project {
     @JsonView({DataViews.ProjectView.class, DataViews.RegionView.class})
     private String linkEnvImpactReport;
 
+    @Column(name = "NOTES")
+    @JsonView({DataViews.ProjectView.class, DataViews.RegionView.class})
+    private String notes;
+
     public Project(
             String projectName,
             String client,
@@ -135,7 +139,8 @@ public class Project {
             boolean commissioned,
             String linkPlans,
             String linkContract,
-            String linkEnvImpactReport
+            String linkEnvImpactReport,
+            String notes
     ) {
         this.projectName = projectName;
         this.client = client;
@@ -160,5 +165,6 @@ public class Project {
         this. linkPlans = linkPlans;
         this.linkContract = linkContract;
         this.linkEnvImpactReport = linkEnvImpactReport;
+        this.notes = notes;
     }
 }

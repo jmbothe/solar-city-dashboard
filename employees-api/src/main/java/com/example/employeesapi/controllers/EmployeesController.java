@@ -34,6 +34,7 @@ public class EmployeesController {
     }
 
     // TODO: is array the right data structure for function parameter??
+    // ANSWER: yes, because size is declared in advance, so insertion is fast
 
     @JsonView(DataViews.EmployeeView.class)
     @GetMapping("/id/{ids}")
@@ -47,6 +48,7 @@ public class EmployeesController {
     }
 
     // TODO: is array the right data structure for function parameter??
+    // ANSWER: yes, because size is declared in advance, so insertion is fast
 
     @JsonView(DataViews.EmployeeView.class)
     @GetMapping("/email/{emails}")

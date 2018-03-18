@@ -49,6 +49,10 @@ public class Employee implements Serializable {
     @JoinColumn(name = "POSITION_ID")
     private Position position;
 
+    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
+    @Column(name = "ASSIGNED_TO")
+    private Long assignedTo;
+
     public Employee(
             String firstName,
             String lastName,
@@ -56,7 +60,8 @@ public class Employee implements Serializable {
             String email,
             String password,
             Region region,
-            Position position
+            Position position,
+            Long assignedTo
     ) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -65,5 +70,6 @@ public class Employee implements Serializable {
         this.password = password;
         this.region = region;
         this.position = position;
+        this.assignedTo = assignedTo;
     }
 }
