@@ -2,6 +2,7 @@ package com.example.employeesapi.models;
 
 import javax.persistence.*;
 
+import com.example.employeesapi.dataviews.DataViews;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
 
@@ -14,17 +15,17 @@ import java.util.List;
 @Entity @Table(name = "POSITIONS")
 public class Position implements Serializable {
 
-    @JsonView({PositionView.Summary.class, EmployeeView.Summary.class, RegionView.Summary.class})
+    @JsonView({DataViews.PositionView.class, DataViews.EmployeeView.class, DataViews.RegionView.class})
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "POSITION_ID")
     private Long id;
 
-    @JsonView({EmployeeView.Summary.class, PositionView.Summary.class, RegionView.Summary.class})
+    @JsonView({DataViews.EmployeeView.class, DataViews.PositionView.class, DataViews.RegionView.class})
     @Column(name = "POSITION")
     private String name;
 
-    @JsonView({PositionView.Summary.class})
+    @JsonView({DataViews.PositionView.class})
     @OneToMany(
         mappedBy = "position",
         cascade = CascadeType.ALL,

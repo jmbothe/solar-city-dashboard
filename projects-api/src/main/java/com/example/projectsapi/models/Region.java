@@ -1,13 +1,11 @@
-package com.example.employeesapi.models;
+package com.example.projectsapi.models;
 
-import javax.persistence.*;
-
-import com.example.employeesapi.dataviews.DataViews;
+import com.example.projectsapi.dataviews.DataViews;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,13 +13,13 @@ import java.util.List;
 @Entity @Table(name = "REGIONS")
 public class Region implements Serializable {
 
-    @JsonView({DataViews.RegionView.class, DataViews.EmployeeView.class, DataViews.PositionView.class})
+    @JsonView({DataViews.RegionView.class, DataViews.ProjectView.class})
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "REGION_ID")
     private Long id;
 
-    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
+    @JsonView({DataViews.ProjectView.class, DataViews.RegionView.class})
     @Column(name = "REGION_NAME")
     private String name;
 
@@ -31,10 +29,10 @@ public class Region implements Serializable {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-    private List<Employee> employees;
+    private List<Project> projects;
 
-    public Region(String name, List<Employee> employees) {
+    public Region(String name, List<Project> employees) {
         this.name = name;
-        this.employees = employees;
+        this.projects = projects;
     }
 }

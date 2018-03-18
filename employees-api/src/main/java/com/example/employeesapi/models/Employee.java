@@ -2,6 +2,7 @@ package com.example.employeesapi.models;
 
 import javax.persistence.*;
 
+import com.example.employeesapi.dataviews.DataViews;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
 
@@ -12,38 +13,38 @@ import java.io.Serializable;
 @Entity @Table(name = "EMPLOYEES")
 public class Employee implements Serializable {
 
-    @JsonView({EmployeeView.Summary.class, RegionView.Summary.class})
+    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EMPLOYEE_ID")
     private Long employeeId;
 
-    @JsonView({EmployeeView.Summary.class, RegionView.Summary.class})
+    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
     @Column(name = "FIRST_NAME")
     private String firstName;
 
-    @JsonView({EmployeeView.Summary.class, RegionView.Summary.class})
+    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @JsonView({EmployeeView.Summary.class, RegionView.Summary.class})
+    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
 
-    @JsonView({EmployeeView.Summary.class, RegionView.Summary.class})
+    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
     @Column(name = "EMAIL")
     private String email;
 
-    @JsonView({EmployeeView.Summary.class, RegionView.Summary.class})
+    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
     @Column(name = "PASSWORD")
     private String password;
 
-    @JsonView({EmployeeView.Summary.class, PositionView.Summary.class})
+    @JsonView({DataViews.EmployeeView.class, DataViews.PositionView.class})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "REGION_ID")
     private Region region;
 
-    @JsonView({EmployeeView.Summary.class, RegionView.Summary.class})
+    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "POSITION_ID")
     private Position position;

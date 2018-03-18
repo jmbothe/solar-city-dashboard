@@ -1,9 +1,7 @@
 package com.example.employeesapi.controllers;
 
+import com.example.employeesapi.dataviews.DataViews;
 import com.example.employeesapi.models.Employee;
-import com.example.employeesapi.models.EmployeeView;
-import com.example.employeesapi.models.PositionView;
-import com.example.employeesapi.models.RegionView;
 import com.example.employeesapi.repositories.EmployeeRepository;
 import com.example.employeesapi.repositories.PositionRepository;
 import com.example.employeesapi.repositories.RegionRepository;
@@ -29,7 +27,7 @@ public class EmployeesController {
     @Autowired
     private PositionRepository positionRepository;
 
-    @JsonView(EmployeeView.Summary.class)
+    @JsonView(DataViews.EmployeeView.class)
     @GetMapping("/all")
     public Iterable<Employee> findAllEmployees() {
         return employeeRepository.findAll();
@@ -37,7 +35,7 @@ public class EmployeesController {
 
     // TODO: is array the right data structure for function parameter??
 
-    @JsonView(EmployeeView.Summary.class)
+    @JsonView(DataViews.EmployeeView.class)
     @GetMapping("/id/{ids}")
     public Iterable<Optional> findEmployeesById(@PathVariable Long[] ids) {
         List<Optional> responseBody = new ArrayList<>();
@@ -50,7 +48,7 @@ public class EmployeesController {
 
     // TODO: is array the right data structure for function parameter??
 
-    @JsonView(EmployeeView.Summary.class)
+    @JsonView(DataViews.EmployeeView.class)
     @GetMapping("/email/{emails}")
     public Iterable<Employee> findEmployeesByEmail(@PathVariable String[] emails) {
         List<Employee> responseBody = new ArrayList<>();
@@ -61,13 +59,13 @@ public class EmployeesController {
         return responseBody;
     }
 
-    @JsonView(RegionView.Summary.class)
+    @JsonView(DataViews.RegionView.class)
     @GetMapping("/region/{region}")
     public Optional findEmployeesByRegion(@PathVariable Long region) {
             return regionRepository.findById(region);
     }
 
-    @JsonView(PositionView.Summary.class)
+    @JsonView(DataViews.PositionView.class)
     @GetMapping("/position/{position}")
     public Optional findEmployeesByPosition(@PathVariable Long position) {
         return positionRepository.findById(position);
