@@ -6,7 +6,8 @@ import com.example.projectsapi.repositories.ProjectRepository;
 import com.example.projectsapi.repositories.RegionRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,6 +48,36 @@ public class ProjectsController {
     @GetMapping("/region/{region}")
     public Optional findProjectsByRegion(@PathVariable Long region) {
         return regionRepository.findById(region);
+    }
+
+    @PatchMapping("/update-dates/{id}")
+    public HttpStatus updateDates(@PathVariable long id, @RequestBody Project projectRequest) {
+        Project project = projectRepository.findById(id).get();
+
+        project.setDateSurvey(projectRequest.getDateSurvey());
+        project.setDateContract(projectRequest.getDateContract());
+        project.setDateStartConstruction(projectRequest.getDateStartConstruction());
+        project.setDateInterconnection(projectRequest.getDateInterconnection());
+        project.setDateOperable(projectRequest.getDateOperable());
+        project.setDateCommission(projectRequest.getDateCommission());
+
+        projectRepository.save(project);
+        return HttpStatus.OK;
+    }
+
+    @PatchMapping("/toggle-milestones/{id}")
+    public HttpStatus toggleMilestones(@PathVariable long id, @RequestBody Project projectRequest) {
+        Project project = projectRepository.findById(id).get();
+
+        project.setSurveyComplete(projectRequest.isSurveyComplete());
+        project.setContractSigned(projectRequest.isContractSigned());
+        project.setConstructionStarted(projectRequest.isConstructionStarted());
+        project.setInterconnected(projectRequest.isInterconnected());
+        project.setOperable(projectRequest.isOperable());
+        project.setCommissioned(projectRequest.isCommissioned());
+
+        projectRepository.save(project);
+        return HttpStatus.OK;
     }
 
 }
