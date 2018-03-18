@@ -92,4 +92,14 @@ public class EmployeesController {
         employeeRepository.save(employee);
         return HttpStatus.OK;
     }
+
+    @PatchMapping("/assign-employee/{id}")
+    public HttpStatus assignEmployee(@PathVariable long id, @RequestBody Employee employeeRequest) {
+        Employee employee = employeeRepository.findById(id).get();
+
+        employee.setAssignedTo(employeeRequest.getAssignedTo());
+        employeeRepository.save(employee);
+        return HttpStatus.OK;
+
+    }
 }
