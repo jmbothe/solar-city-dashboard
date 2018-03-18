@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -31,9 +30,9 @@ public class Region implements Serializable {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-    private List<Employee> employees;
+    private List<RegionEmployee> employees;
 
-    public Region(String name, List<Employee> employees) {
+    public Region(String name, List<RegionEmployee> employees) {
         this.name = name;
         this.employees = employees;
     }

@@ -31,10 +31,10 @@ public class Position implements Serializable {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-    private List<Employee> employees = new ArrayList<>();
+    private List<RegionEmployee> employees = new ArrayList<>();
 
 
-    public Position(String name, List<Employee> employees) {
+    public Position(String name, List<RegionEmployee> employees) {
         this.name = name;
         this.employees = employees;
     }

@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor @NoArgsConstructor @Getter @Setter
 @Entity @Table(name = "EMPLOYEES")
-public class Employee implements Serializable {
+public class RegionEmployee implements Serializable {
 
     @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
     @Id
@@ -39,25 +39,28 @@ public class Employee implements Serializable {
     @Column(name = "PASSWORD")
     private String password;
 
-    @Column(name="REGION_ID")
-    private long regionId;
+    @JsonView({DataViews.EmployeeView.class, DataViews.PositionView.class})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "REGION_ID")
+    private Region region;
 
-
-    @Column(name="POSITION_ID")
-    private long positionId;
+    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "POSITION_ID")
+    private Position position;
 
     @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
     @Column(name = "ASSIGNED_TO")
     private Long assignedTo;
 
-    public Employee(
+    public RegionEmployee(
             String firstName,
             String lastName,
             String phoneNumber,
             String email,
             String password,
-            long regionId,
-            long positionId,
+            Region region,
+            Position position,
             Long assignedTo
     ) {
         this.firstName = firstName;
@@ -65,8 +68,8 @@ public class Employee implements Serializable {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
-        this.regionId = regionId;
-        this.positionId = positionId;
+        this.region = region;
+        this.position = position;
         this.assignedTo = assignedTo;
     }
 }
