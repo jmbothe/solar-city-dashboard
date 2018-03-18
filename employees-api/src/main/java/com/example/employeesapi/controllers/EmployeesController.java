@@ -7,9 +7,8 @@ import com.example.employeesapi.repositories.PositionRepository;
 import com.example.employeesapi.repositories.RegionRepository;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,5 +70,26 @@ public class EmployeesController {
     @GetMapping("/position/{position}")
     public Optional findEmployeesByPosition(@PathVariable Long position) {
         return positionRepository.findById(position);
+    }
+
+    @PatchMapping("/update-employee-contact/{id}")
+    public HttpStatus updateEmployeeContact(@PathVariable long id, @RequestBody Employee employeeRequest) {
+        Employee employee = employeeRepository.findById(id).get();
+
+        employee.setPhoneNumber(employeeRequest.getPhoneNumber());
+        employee.setEmail(employeeRequest.getEmail());
+
+        employeeRepository.save(employee);
+        return HttpStatus.OK;
+    }
+
+    @PatchMapping("/unassign-employee/{id}")
+    public HttpStatus unassignEmployee(@PathVariable long id) {
+        Employee employee = employeeRepository.findById(id).get();
+
+        employee.setAssignedTo(null);
+
+        employeeRepository.save(employee);
+        return HttpStatus.OK;
     }
 }
