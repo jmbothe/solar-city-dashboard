@@ -8,13 +8,19 @@ import com.example.employeesapi.repositories.PositionRepository;
 import com.example.employeesapi.repositories.RegionEmployeeRepository;
 import com.example.employeesapi.repositories.RegionRepository;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.StreamSupport;
 
 @RestController
 public class EmployeesController {
@@ -65,16 +71,22 @@ public class EmployeesController {
         return responseBody;
     }
 
-    @JsonView(DataViews.RegionView.class)
+    @JsonView(DataViews.EmployeeView.class)
     @GetMapping("/by-region/{region}")
-    public Optional findEmployeesByRegion(@PathVariable Long region) {
-            return regionRepository.findById(region);
+    public Iterable<RegionEmployee> findEmployeesByRegion(@PathVariable Long region) {
+        return StreamSupport
+            .stream(regionEmployeeRepository.findAll().spliterator(), false)
+            .filter(employee -> employee.getRegion().getId() == region)
+            .collect(Collectors.toList());
     }
 
-    @JsonView(DataViews.PositionView.class)
+    @JsonView(DataViews.EmployeeView.class)
     @GetMapping("/by-position/{position}")
-    public Optional findEmployeesByPosition(@PathVariable Long position) {
-        return positionRepository.findById(position);
+    public Iterable<RegionEmployee> findEmployeesByPosition(@PathVariable Long position) {
+        return StreamSupport
+            .stream(regionEmployeeRepository.findAll().spliterator(), false)
+            .filter(employee -> employee.getPosition().getId() == position)
+            .collect(Collectors.toList());
     }
 
     @PatchMapping("/update-contact/{id}")

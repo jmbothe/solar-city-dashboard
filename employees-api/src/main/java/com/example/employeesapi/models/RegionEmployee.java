@@ -41,12 +41,12 @@ public class RegionEmployee implements Serializable {
 
     @JsonView({DataViews.EmployeeView.class, DataViews.PositionView.class})
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "REGION_ID")
+    @JoinColumn(name = "REGION_ID", referencedColumnName="REGION_ID")
     private Region region;
 
     @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class})
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "POSITION_ID")
+    @JoinColumn(name = "POSITION_ID", referencedColumnName = "POSITION_ID")
     private Position position;
 
     @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
