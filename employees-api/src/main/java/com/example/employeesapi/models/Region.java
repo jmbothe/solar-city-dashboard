@@ -14,25 +14,24 @@ import java.util.List;
 @Entity @Table(name = "REGIONS")
 public class Region implements Serializable {
 
-    @JsonView({DataViews.RegionView.class, DataViews.EmployeeView.class, DataViews.PositionView.class})
+    @JsonView({DataViews.Concise.class})
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "REGION_ID")
     private Long id;
 
-    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
+    @JsonView({DataViews.Concise.class})
     @Column(name = "REGION_NAME")
     private String name;
 
-    @JsonView({DataViews.RegionView.class})
     @OneToMany(
         mappedBy = "region",
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-    private List<RegionEmployee> employees;
+    private List<Employee> employees;
 
-    public Region(String name, List<RegionEmployee> employees) {
+    public Region(String name, List<Employee> employees) {
         this.name = name;
         this.employees = employees;
     }

@@ -30,16 +30,15 @@ public class ProjectsController {
         return projectRepository.findAll();
     }
 
-    // TODO: is array the right data structure for function parameter??
-    // ANSWER: yes, because size is declared in advance, so insertion is fast
-
     @JsonView(DataViews.ProjectView.class)
     @GetMapping("/id/{ids}")
-    public Iterable<Optional> findProjectsById(@PathVariable Long[] ids) {
-        List<Optional> responseBody = new ArrayList<>();
+    public Optional[] findProjectsById(@PathVariable Long[] ids) {
+        Optional[] responseBody = new Optional[ids.length];
 
+        int i = 0;
         for (Long id : ids) {
-            responseBody.add(projectRepository.findById(id));
+            responseBody[i] = projectRepository.findById(id);
+            i++;
         }
         return responseBody;
     }

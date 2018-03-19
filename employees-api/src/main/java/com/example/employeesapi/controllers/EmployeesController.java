@@ -2,23 +2,18 @@ package com.example.employeesapi.controllers;
 
 import com.example.employeesapi.dataviews.DataViews;
 import com.example.employeesapi.models.Employee;
-import com.example.employeesapi.models.RegionEmployee;
 import com.example.employeesapi.repositories.EmployeeRepository;
 import com.example.employeesapi.repositories.PositionRepository;
-import com.example.employeesapi.repositories.RegionEmployeeRepository;
 import com.example.employeesapi.repositories.RegionRepository;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.google.common.collect.Lists;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
@@ -34,57 +29,52 @@ public class EmployeesController {
     @Autowired
     private PositionRepository positionRepository;
 
-    @Autowired
-    private RegionEmployeeRepository regionEmployeeRepository;
-
-    @JsonView(DataViews.EmployeeView.class)
+    @JsonView(DataViews.Concise.class)
     @GetMapping("/all")
-    public Iterable<RegionEmployee> findAllEmployees() {
-        return regionEmployeeRepository.findAll();
+    public Iterable<Employee> findAllEmployees() {
+        return employeeRepository.findAll();
     }
 
-    // TODO: is array the right data structure for function parameter??
-    // ANSWER: yes, because size is declared in advance, so insertion is fast
-
-    @JsonView(DataViews.EmployeeView.class)
+    @JsonView(DataViews.Concise.class)
     @GetMapping("/by-id/{ids}")
-    public Iterable<Optional> findEmployeesById(@PathVariable Long[] ids) {
-        List<Optional> responseBody = new ArrayList<>();
+    public Optional[] findEmployeesById(@PathVariable Long[] ids) {
+        Optional[] responseBody = new Optional[ids.length];
 
+        int i = 0;
         for (Long id : ids) {
-            responseBody.add(regionEmployeeRepository.findById(id));
+            responseBody[i] = employeeRepository.findById(id);
+            i++;
         }
         return responseBody;
     }
 
-    // TODO: is array the right data structure for function parameter??
-    // ANSWER: yes, because size is declared in advance, so insertion is fast
-
-    @JsonView(DataViews.EmployeeView.class)
+    @JsonView(DataViews.Concise.class)
     @GetMapping("/by-email/{emails}")
-    public Iterable<RegionEmployee> findEmployeesByEmail(@PathVariable String[] emails) {
-        List<RegionEmployee> responseBody = new ArrayList<>();
+    public Employee[] findEmployeesByEmail(@PathVariable String[] emails) {
+        Employee[] responseBody = new Employee[emails.length];
 
+        int i = 0;
         for (String email : emails) {
-            responseBody.add(regionEmployeeRepository.findByEmailContaining(email));
+            responseBody[i] = employeeRepository.findByEmailContaining(email);
+            i++;
         }
         return responseBody;
     }
 
-    @JsonView(DataViews.EmployeeView.class)
+    @JsonView(DataViews.Concise.class)
     @GetMapping("/by-region/{region}")
-    public Iterable<RegionEmployee> findEmployeesByRegion(@PathVariable Long region) {
+    public Iterable<Employee> findEmployeesByRegion(@PathVariable Long region) {
         return StreamSupport
-            .stream(regionEmployeeRepository.findAll().spliterator(), false)
+            .stream(employeeRepository.findAll().spliterator(), false)
             .filter(employee -> employee.getRegion().getId() == region)
             .collect(Collectors.toList());
     }
 
-    @JsonView(DataViews.EmployeeView.class)
+    @JsonView(DataViews.Concise.class)
     @GetMapping("/by-position/{position}")
-    public Iterable<RegionEmployee> findEmployeesByPosition(@PathVariable Long position) {
+    public Iterable<Employee> findEmployeesByPosition(@PathVariable Long position) {
         return StreamSupport
-            .stream(regionEmployeeRepository.findAll().spliterator(), false)
+            .stream(employeeRepository.findAll().spliterator(), false)
             .filter(employee -> employee.getPosition().getId() == position)
             .collect(Collectors.toList());
     }
@@ -92,10 +82,8 @@ public class EmployeesController {
     @PatchMapping("/update-contact/{id}")
     public HttpStatus updateEmployeeContact(@PathVariable long id, @RequestBody Employee employeeRequest) {
         Employee employee = employeeRepository.findById(id).get();
-
         employee.setPhoneNumber(employeeRequest.getPhoneNumber());
         employee.setEmail(employeeRequest.getEmail());
-
         employeeRepository.save(employee);
         return HttpStatus.OK;
     }
@@ -103,9 +91,7 @@ public class EmployeesController {
     @PatchMapping("/unassign/{id}")
     public HttpStatus unassignEmployee(@PathVariable long id) {
         Employee employee = employeeRepository.findById(id).get();
-
         employee.setAssignedTo(null);
-
         employeeRepository.save(employee);
         return HttpStatus.OK;
     }
@@ -113,7 +99,6 @@ public class EmployeesController {
     @PatchMapping("/assign/{id}")
     public HttpStatus assignEmployee(@PathVariable long id, @RequestBody Employee employeeRequest) {
         Employee employee = employeeRepository.findById(id).get();
-
         employee.setAssignedTo(employeeRequest.getAssignedTo());
         employeeRepository.save(employee);
         return HttpStatus.OK;
@@ -127,7 +112,6 @@ public class EmployeesController {
 
     @PostMapping("/create")
     public Employee createNewEmployee(@RequestBody Employee newEmployee) {
-
         return employeeRepository.save(newEmployee);
     }
 }

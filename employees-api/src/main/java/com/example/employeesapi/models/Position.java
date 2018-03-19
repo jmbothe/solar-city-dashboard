@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,26 +14,24 @@ import java.util.List;
 @Entity @Table(name = "POSITIONS")
 public class Position implements Serializable {
 
-    @JsonView({DataViews.PositionView.class, DataViews.EmployeeView.class, DataViews.RegionView.class})
+    @JsonView({DataViews.Concise.class})
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "POSITION_ID")
     private Long id;
 
-    @JsonView({DataViews.EmployeeView.class, DataViews.PositionView.class, DataViews.RegionView.class})
+    @JsonView({DataViews.Concise.class})
     @Column(name = "POSITION")
     private String name;
 
-    @JsonView({DataViews.PositionView.class})
     @OneToMany(
         mappedBy = "position",
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-    private List<RegionEmployee> employees = new ArrayList<>();
+    private List<Employee> employees;
 
-
-    public Position(String name, List<RegionEmployee> employees) {
+    public Position(String name, List<Employee> employees) {
         this.name = name;
         this.employees = employees;
     }

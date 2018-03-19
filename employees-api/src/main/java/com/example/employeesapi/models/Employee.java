@@ -13,40 +13,43 @@ import java.io.Serializable;
 @Entity @Table(name = "EMPLOYEES")
 public class Employee implements Serializable {
 
-    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
+    @JsonView({DataViews.Concise.class})
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "EMPLOYEE_ID")
     private Long employeeId;
 
-    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
+    @JsonView({DataViews.Concise.class})
     @Column(name = "FIRST_NAME")
     private String firstName;
 
-    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
+    @JsonView({DataViews.Concise.class})
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
+    @JsonView({DataViews.Concise.class})
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
 
-    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
+    @JsonView({DataViews.Concise.class})
     @Column(name = "EMAIL")
     private String email;
 
-    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
+    @JsonView({DataViews.Concise.class})
     @Column(name = "PASSWORD")
     private String password;
 
-    @Column(name="REGION_ID")
-    private long regionId;
+    @JsonView({DataViews.Concise.class})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "REGION_ID", referencedColumnName="REGION_ID")
+    private Region region;
 
+    @JsonView({DataViews.Concise.class})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "POSITION_ID", referencedColumnName = "POSITION_ID")
+    private Position position;
 
-    @Column(name="POSITION_ID")
-    private long positionId;
-
-    @JsonView({DataViews.EmployeeView.class, DataViews.RegionView.class, DataViews.PositionView.class})
+    @JsonView({DataViews.Concise.class})
     @Column(name = "ASSIGNED_TO")
     private Long assignedTo;
 
@@ -56,8 +59,8 @@ public class Employee implements Serializable {
             String phoneNumber,
             String email,
             String password,
-            long regionId,
-            long positionId,
+            Region region,
+            Position position,
             Long assignedTo
     ) {
         this.firstName = firstName;
@@ -65,8 +68,8 @@ public class Employee implements Serializable {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
-        this.regionId = regionId;
-        this.positionId = positionId;
+        this.region = region;
+        this.position = position;
         this.assignedTo = assignedTo;
     }
 }
