@@ -21,11 +21,13 @@ public class ProjectsController {
     @Autowired
     private RegionRepository regionRepository;
 
+    @CrossOrigin
     @GetMapping("/all")
     public Iterable<Project> findAllProjects() {
         return projectRepository.findAll();
     }
 
+    @CrossOrigin
     @GetMapping("/id/{ids}")
     public Optional[] findProjectsById(@PathVariable Long[] ids) {
         Optional[] responseBody = new Optional[ids.length];
@@ -38,6 +40,7 @@ public class ProjectsController {
         return responseBody;
     }
 
+    @CrossOrigin
     @GetMapping("/by-region/{region}")
     public Iterable<Project> findProjectsByRegion(@PathVariable Long region) {
         return StreamSupport
@@ -46,6 +49,7 @@ public class ProjectsController {
                 .collect(Collectors.toList());
     }
 
+    @CrossOrigin
     @PatchMapping("/update-dates/{id}")
     public HttpStatus updateDates(@PathVariable long id, @RequestBody Project projectRequest) {
         Project project = projectRepository.findById(id).get();
@@ -61,6 +65,7 @@ public class ProjectsController {
         return HttpStatus.OK;
     }
 
+    @CrossOrigin
     @PatchMapping("/toggle-milestones/{id}")
     public HttpStatus toggleMilestones(@PathVariable long id, @RequestBody Project projectRequest) {
         Project project = projectRepository.findById(id).get();
@@ -76,6 +81,7 @@ public class ProjectsController {
         return HttpStatus.OK;
     }
 
+    @CrossOrigin
     @PatchMapping("/edit-notes/{id}")
     public HttpStatus editNotes(@PathVariable long id, @RequestBody Project projectRequest) {
         Project project = projectRepository.findById(id).get();
