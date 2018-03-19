@@ -1,11 +1,8 @@
 package com.example.employeesapi.models;
 
 import javax.persistence.*;
-
-import com.example.employeesapi.dataviews.DataViews;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,16 +11,15 @@ import java.util.List;
 @Entity @Table(name = "REGIONS")
 public class Region implements Serializable {
 
-    @JsonView({DataViews.Concise.class})
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "REGION_ID")
     private Long id;
 
-    @JsonView({DataViews.Concise.class})
     @Column(name = "REGION_NAME")
     private String name;
 
+    @JsonIgnore
     @OneToMany(
         mappedBy = "region",
         cascade = CascadeType.ALL,

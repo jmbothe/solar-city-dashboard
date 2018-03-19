@@ -1,11 +1,9 @@
 package com.example.employeesapi.controllers;
 
-import com.example.employeesapi.dataviews.DataViews;
 import com.example.employeesapi.models.Employee;
 import com.example.employeesapi.repositories.EmployeeRepository;
 import com.example.employeesapi.repositories.PositionRepository;
 import com.example.employeesapi.repositories.RegionRepository;
-import com.fasterxml.jackson.annotation.JsonView;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,13 +27,11 @@ public class EmployeesController {
     @Autowired
     private PositionRepository positionRepository;
 
-    @JsonView(DataViews.Concise.class)
     @GetMapping("/all")
     public Iterable<Employee> findAllEmployees() {
         return employeeRepository.findAll();
     }
 
-    @JsonView(DataViews.Concise.class)
     @GetMapping("/by-id/{ids}")
     public Optional[] findEmployeesById(@PathVariable Long[] ids) {
         Optional[] responseBody = new Optional[ids.length];
@@ -48,7 +44,6 @@ public class EmployeesController {
         return responseBody;
     }
 
-    @JsonView(DataViews.Concise.class)
     @GetMapping("/by-email/{emails}")
     public Employee[] findEmployeesByEmail(@PathVariable String[] emails) {
         Employee[] responseBody = new Employee[emails.length];
@@ -61,7 +56,6 @@ public class EmployeesController {
         return responseBody;
     }
 
-    @JsonView(DataViews.Concise.class)
     @GetMapping("/by-region/{region}")
     public Iterable<Employee> findEmployeesByRegion(@PathVariable Long region) {
         return StreamSupport
@@ -70,7 +64,6 @@ public class EmployeesController {
             .collect(Collectors.toList());
     }
 
-    @JsonView(DataViews.Concise.class)
     @GetMapping("/by-position/{position}")
     public Iterable<Employee> findEmployeesByPosition(@PathVariable Long position) {
         return StreamSupport

@@ -1,19 +1,16 @@
 package com.example.projectsapi.controllers;
 
-import com.example.projectsapi.dataviews.DataViews;
 import com.example.projectsapi.models.Project;
 import com.example.projectsapi.repositories.ProjectRepository;
 import com.example.projectsapi.repositories.RegionRepository;
-import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
 public class ProjectsController {
@@ -24,13 +21,11 @@ public class ProjectsController {
     @Autowired
     private RegionRepository regionRepository;
 
-    @JsonView(DataViews.ProjectView.class)
     @GetMapping("/all")
     public Iterable<Project> findAllProjects() {
         return projectRepository.findAll();
     }
 
-    @JsonView(DataViews.ProjectView.class)
     @GetMapping("/id/{ids}")
     public Optional[] findProjectsById(@PathVariable Long[] ids) {
         Optional[] responseBody = new Optional[ids.length];
@@ -43,10 +38,12 @@ public class ProjectsController {
         return responseBody;
     }
 
-    @JsonView(DataViews.RegionView.class)
-    @GetMapping("/region/{region}")
-    public Optional findProjectsByRegion(@PathVariable Long region) {
-        return regionRepository.findById(region);
+    @GetMapping("/by-region/{region}")
+    public Iterable<Project> findProjectsByRegion(@PathVariable Long region) {
+        return StreamSupport
+                .stream(projectRepository.findAll().spliterator(), false)
+                .filter(project -> project.getRegion().getId() == region)
+                .collect(Collectors.toList());
     }
 
     @PatchMapping("/update-dates/{id}")
