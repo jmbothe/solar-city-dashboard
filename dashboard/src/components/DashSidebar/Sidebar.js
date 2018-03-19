@@ -13,6 +13,7 @@ class DashSidebar extends Component {
       />
       <ProjectsList
         projects={this.props.projects}
+        changeProjectInView={this.props.changeProjectInView}
       />
       </nav>
     )

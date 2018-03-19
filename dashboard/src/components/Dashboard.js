@@ -66,6 +66,12 @@ class Dashboard extends Component {
     this.setState({ projects });
   }
 
+  changeProjectInView = (id) => {
+    this.setState({
+      projectInView: this.state.projects.find(project => project.projectId == id)
+    })
+  }
+
   render() {
     if (!this.state.crew) {
       return <div></div>
@@ -81,6 +87,7 @@ class Dashboard extends Component {
               management={this.state.management}
               projects={this.state.projects}
               projectInView={this.state.projectInView}
+              changeProjectInView={this.changeProjectInView}
             />
             <Main
               projects={this.state.projects}

@@ -9,7 +9,13 @@ class ProjectsList extends Component {
         <ul>
           {this.props.projects.map(project => {
             return (
-              <li key={project.projectId}>{project.client} {project.projectName}</li>
+              <li key={project.projectId}>
+              <button
+                onClick={() => this.props.changeProjectInView(project.projectId)}
+              >
+              {project.client} {project.projectName}
+              </button>
+              </li>
             )
           })}
         </ul>
