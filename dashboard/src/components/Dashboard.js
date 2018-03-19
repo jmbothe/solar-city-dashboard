@@ -37,7 +37,27 @@ class Dashboard extends Component {
         console.log(`Error unassigning crew member ID${id} from job`)
         console.log(error)
     }
-}
+  }
+
+  updateNotes = async (id, notes) => {
+    try {
+      await fetch(`/projects/edit-notes/${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify(notes),
+        headers: {
+          'content-type': 'application/json'
+        },
+      })
+    } catch (error) {
+      console.log(`error updating idea`)
+    }
+  }
+
+  changeNotes = (id, updatedNote) => {
+    const projects = [...this.state.projects];
+    projects.find(project => project.projectId == id).notes = updatedNote;
+    this.setState({ projects });
+  }
 
   render() {
     if (!this.state.crew) {
