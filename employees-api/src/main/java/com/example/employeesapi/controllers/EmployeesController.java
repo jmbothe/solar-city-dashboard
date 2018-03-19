@@ -84,9 +84,9 @@ public class EmployeesController {
     }
     
     @PatchMapping("/unassign/{id}")
-    public HttpStatus unassignEmployee(@PathVariable long id) {
+    public HttpStatus unassignEmployee(@PathVariable long id,  @RequestBody Employee employeeRequest) {
         Employee employee = employeeRepository.findById(id).get();
-        employee.setAssignedTo(null);
+        employee.setAssignedTo(employeeRequest.getAssignedTo());
         employeeRepository.save(employee);
         return HttpStatus.OK;
     }

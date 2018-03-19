@@ -12,6 +12,8 @@ class ProjectView extends Component {
           project={this.props.project}
           crew={this.props.crew}
           unassignCrewMember={this.props.unassignCrewMember}
+          updateNotes={this.props.updateNotes}
+          changeNotes={this.props.changeNotes}
         />
       </section>
     )

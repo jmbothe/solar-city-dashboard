@@ -76,7 +76,7 @@ public class ProjectsController {
         projectRepository.save(project);
         return HttpStatus.OK;
     }
-    
+
     @PatchMapping("/edit-notes/{id}")
     public HttpStatus editNotes(@PathVariable long id, @RequestBody Project projectRequest) {
         Project project = projectRepository.findById(id).get();

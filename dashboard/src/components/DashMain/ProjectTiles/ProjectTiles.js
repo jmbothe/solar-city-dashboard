@@ -17,7 +17,9 @@ class ProjectTiles extends Component {
           unassignCrewMember={this.props.unassignCrewMember}
         />
         <ProjectNotes
-          notes={this.props.project.notes}
+          project={this.props.project}
+          updateNotes={this.props.updateNotes}
+          changeNotes={this.props.changeNotes}
         />
       </section>
     )

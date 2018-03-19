@@ -9,6 +9,8 @@ class DashMain extends Component {
         project={this.props.projectInView}
         crew={this.props.crew.filter(member => member.assignedTo == this.props.projectInView.projectId)}
         unassignCrewMember={this.props.unassignCrewMember}
+        updateNotes={this.props.updateNotes}
+        changeNotes={this.props.changeNotes}
       />
     )
   }

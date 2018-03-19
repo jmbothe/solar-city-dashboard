@@ -29,7 +29,13 @@ class Dashboard extends Component {
 
   unassignCrewMember = async (id) => {
     try {
-        await fetch(`/employees/unassing/${id}`, {method: 'PATCH'});
+        await fetch(`/employees/unassing/${id}`, {
+          method: 'PATCH',
+          body: JSON.stringify({assignedTo: null}),
+          headers: {
+          'content-type': 'application/json'
+          },
+        });
         const crew = [...this.state.crew];
         crew.find(member => member.employeeId == id).assignedTo = null;
         this.setState({crew});
@@ -39,8 +45,9 @@ class Dashboard extends Component {
     }
   }
 
-  updateNotes = async (id, notes) => {
+  updateNotes = async (id) => {
     try {
+      const notes = this.projects.find(project => project.projectId == id).notes;
       await fetch(`/projects/edit-notes/${id}`, {
         method: 'PATCH',
         body: JSON.stringify(notes),
@@ -49,7 +56,7 @@ class Dashboard extends Component {
         },
       })
     } catch (error) {
-      console.log(`error updating idea`)
+      console.log(`error updating notes for project ${id}`)
     }
   }
 
@@ -80,6 +87,8 @@ class Dashboard extends Component {
               projectInView={this.state.projectInView}
               crew={this.state.crew}
               unassignCrewMember={this.unassignCrewMember}
+              updateNotes={this.updateNotes}
+              changeNotes={this.changeNotes}
             />
           </section>
         </div>
