@@ -4,11 +4,16 @@ import ProjectsList from './ProjectsList';
 
 class DashSidebar extends Component {
   state = {}
-  render() { 
+  render() {
     return (
       <nav>
-      <RegionDetails />
-      <ProjectsList />
+      <RegionDetails
+        region={this.props.region}
+        management={this.props.management}
+      />
+      <ProjectsList
+        projects={this.props.projects}
+      />
       </nav>
     )
   }

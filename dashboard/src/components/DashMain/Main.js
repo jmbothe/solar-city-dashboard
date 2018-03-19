@@ -4,7 +4,9 @@ class DashMain extends Component {
   state = {}
   render() { 
     return (
-      <section>Main</section>
+      <section>
+        
+      </section>
     )
   }
 }

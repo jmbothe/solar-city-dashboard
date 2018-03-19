@@ -7,7 +7,11 @@ class ProjectsList extends Component {
       <section>
         <h2>Projects</h2>
         <ul>
-          
+          {this.props.projects.map(project => {
+            return (
+              <li key={project.projectId}>{project.projectId} {project.client} {project.projectName}</li>
+            )
+          })}
         </ul>
       </section>
     )

@@ -4,45 +4,62 @@ import Sidebar from './DashSidebar/Sidebar';
 
 class Dashboard extends Component {
   state = {
-    regionId: 1,
-    projectManager: null,
-    projectCoordinator: null,
-    constructionManager: null,
+    region: {id: 1, name: "Mid-Atlantic"},
+    management: {
+      projectManager: null,
+      projectCoordinator: null,
+      constructionManager: null,
+    },
     crew: [],
     projects: [],
+    projectInView: null,
   }
 
   async componentDidMount() {
     try {
-      const employeesResponse = await fetch(`http://localhost:8080/employees/by-region/${this.state.regionId}`);
+      const employeesResponse = await fetch(`http://localhost:8080/employees/by-region/${this.state.region.id}`);
       const employees = await employeesResponse.json();
-      const projectsResponse = await fetch(`http://localhost:8080/projects/by-region/${this.state.regionId}`)
+      const projectsResponse = await fetch(`http://localhost:8080/projects/by-region/${this.state.region.id}`)
       const projects = await projectsResponse.json();
 
-      this.setState({
+      const management = {
         projectManager: employees.find(employee => employee.position.id == 1),
         projectCoordinator: employees.find(employee => employee.position.id == 2),
         constructionManager: employees.find(employee => employee.position.id == 3),
-        crew: employees.filter(employee => employee.position.id == 4),
-        projects
-      })
+      };
+      const crew = employees.filter(employee => employee.position.id == 4);
+
+      this.setState({management, crew, projects, projectInView: projects[0]})
     } catch (error) {
       console.log('error getting employee and project info')
     }
   }
 
-  render() { 
+  render() {
+    if (this.state.crew.length == 0) {
+      return <div></div>
+    } else {
     return (
       <div className="dashboard-wrapper">
         <header>
           <h1>Solar City Project Manager Dashboard</h1>
         </header>
         <section className="dashboard">
-          <Sidebar />
-          <Main />
-        </section>
-      </div>
-    )
+            <Sidebar
+              region={this.state.region}
+              management={this.state.management}
+              projects={this.state.projects}
+              projectInView={this.state.projectInView}
+            />
+            <Main
+              projects={this.state.projects}
+              projectInView={this.state.projectInView}
+              crew={this.state.crew}
+            />
+          </section>
+        </div>
+      )
+    }
   }
 }
  
