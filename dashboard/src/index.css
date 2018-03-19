@@ -1,5 +1,25 @@
+* {
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
 body {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0;
+  height: 100vh;
   font-family: sans-serif;
+}
+
+#root {
+  height: 100vh;
+}
+
+.dashboard-wrapper {
+  height: 100%;
+}
+
+.dashboard {
+  display: flex;
 }
