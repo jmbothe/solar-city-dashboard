@@ -9,7 +9,7 @@ class ProjectsList extends Component {
         <ul>
           {this.props.projects.map(project => {
             return (
-              <li key={project.projectId}>{project.projectId} {project.client} {project.projectName}</li>
+              <li key={project.projectId}>{project.client} {project.projectName}</li>
             )
           })}
         </ul>

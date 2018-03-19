@@ -5,14 +5,6 @@ import Sidebar from './DashSidebar/Sidebar';
 class Dashboard extends Component {
   state = {
     region: {id: 1, name: "Mid-Atlantic"},
-    management: {
-      projectManager: null,
-      projectCoordinator: null,
-      constructionManager: null,
-    },
-    crew: [],
-    projects: [],
-    projectInView: null,
   }
 
   async componentDidMount() {
@@ -36,7 +28,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    if (this.state.crew.length == 0) {
+    if (!this.state.crew) {
       return <div></div>
     } else {
     return (

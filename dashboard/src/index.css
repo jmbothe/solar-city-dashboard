@@ -8,18 +8,32 @@ body {
   flex-direction: column;
   margin: 0;
   padding: 0;
-  height: 100vh;
   font-family: sans-serif;
 }
 
-#root {
-  height: 100vh;
-}
-
-.dashboard-wrapper {
-  height: 100%;
+ul {
+  list-style: none;
+  padding: 0;
 }
 
 .dashboard {
+  display: flex;
+}
+
+.project-view {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.project-tiles {
+  display: flex;
+}
+
+.project-tiles > section {
+  flex-grow: 1;
+}
+
+.crew-list-item {
   display: flex;
 }
