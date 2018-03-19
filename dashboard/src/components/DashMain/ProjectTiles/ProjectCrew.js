@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 
 class ProjectCrew extends Component {
-  state = {}
+  
+  handleClick = (id) => {
+    this.props.unassignCrewMember(id);
+  }
+
   render() { 
     return (
       <section>
@@ -14,7 +18,7 @@ class ProjectCrew extends Component {
               className="crew-list-item"
             >
               <div>
-                {member.firstName} {member.lastName}
+                {member.employeeId} {member.firstName} {member.lastName}
                 <br/>
                 {member.phoneNumber}
                 {
@@ -27,7 +31,7 @@ class ProjectCrew extends Component {
                 }
                 </div>
               <div>
-                <button>Remove</button>
+                <button onClick={() => this.handleClick(member.employeeId)}>Remove</button>
               </div>
             </li>
           )}

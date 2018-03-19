@@ -11,6 +11,7 @@ class ProjectView extends Component {
         <ProjectTiles
           project={this.props.project}
           crew={this.props.crew}
+          unassignCrewMember={this.props.unassignCrewMember}
         />
       </section>
     )

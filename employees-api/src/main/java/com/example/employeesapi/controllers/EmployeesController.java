@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class EmployeesController {
 
@@ -27,13 +28,11 @@ public class EmployeesController {
     @Autowired
     private PositionRepository positionRepository;
 
-    @CrossOrigin
     @GetMapping("/all")
     public Iterable<Employee> findAllEmployees() {
         return employeeRepository.findAll();
     }
-
-    @CrossOrigin
+    
     @GetMapping("/by-id/{ids}")
     public Optional[] findEmployeesById(@PathVariable Long[] ids) {
         Optional[] responseBody = new Optional[ids.length];
@@ -45,8 +44,7 @@ public class EmployeesController {
         }
         return responseBody;
     }
-
-    @CrossOrigin
+    
     @GetMapping("/by-email/{emails}")
     public Employee[] findEmployeesByEmail(@PathVariable String[] emails) {
         Employee[] responseBody = new Employee[emails.length];
@@ -59,7 +57,7 @@ public class EmployeesController {
         return responseBody;
     }
 
-    @CrossOrigin
+    
     @GetMapping("/by-region/{region}")
     public Iterable<Employee> findEmployeesByRegion(@PathVariable Long region) {
         return StreamSupport
@@ -67,8 +65,7 @@ public class EmployeesController {
             .filter(employee -> employee.getRegion().getId() == region)
             .collect(Collectors.toList());
     }
-
-    @CrossOrigin
+    
     @GetMapping("/by-position/{position}")
     public Iterable<Employee> findEmployeesByPosition(@PathVariable Long position) {
         return StreamSupport
@@ -77,7 +74,6 @@ public class EmployeesController {
             .collect(Collectors.toList());
     }
 
-    @CrossOrigin
     @PatchMapping("/update-contact/{id}")
     public HttpStatus updateEmployeeContact(@PathVariable long id, @RequestBody Employee employeeRequest) {
         Employee employee = employeeRepository.findById(id).get();
@@ -86,8 +82,7 @@ public class EmployeesController {
         employeeRepository.save(employee);
         return HttpStatus.OK;
     }
-
-    @CrossOrigin
+    
     @PatchMapping("/unassign/{id}")
     public HttpStatus unassignEmployee(@PathVariable long id) {
         Employee employee = employeeRepository.findById(id).get();
@@ -96,7 +91,6 @@ public class EmployeesController {
         return HttpStatus.OK;
     }
 
-    @CrossOrigin
     @PatchMapping("/assign/{id}")
     public HttpStatus assignEmployee(@PathVariable long id, @RequestBody Employee employeeRequest) {
         Employee employee = employeeRepository.findById(id).get();
@@ -104,15 +98,13 @@ public class EmployeesController {
         employeeRepository.save(employee);
         return HttpStatus.OK;
     }
-
-    @CrossOrigin
+    
     @DeleteMapping("/delete/{id}")
     public HttpStatus deleteUserById(@PathVariable Long id) {
         employeeRepository.deleteById(id);
         return HttpStatus.OK;
     }
-
-    @CrossOrigin
+    
     @PostMapping("/create")
     public Employee createNewEmployee(@RequestBody Employee newEmployee) {
         return employeeRepository.save(newEmployee);

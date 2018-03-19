@@ -9,9 +9,9 @@ class Dashboard extends Component {
 
   async componentDidMount() {
     try {
-      const employeesResponse = await fetch(`http://localhost:8080/employees/by-region/${this.state.region.id}`);
+      const employeesResponse = await fetch(`/employees/by-region/${this.state.region.id}`);
       const employees = await employeesResponse.json();
-      const projectsResponse = await fetch(`http://localhost:8080/projects/by-region/${this.state.region.id}`)
+      const projectsResponse = await fetch(`/projects/by-region/${this.state.region.id}`)
       const projects = await projectsResponse.json();
 
       const management = {
@@ -26,6 +26,18 @@ class Dashboard extends Component {
       console.log('error getting employee and project info')
     }
   }
+
+  unassignCrewMember = async (id) => {
+    try {
+        await fetch(`/employees/unassing/${id}`, {method: 'PATCH'});
+        const crew = [...this.state.crew];
+        crew.find(member => member.employeeId == id).assignedTo = null;
+        this.setState({crew});
+    } catch (error) {
+        console.log(`Error unassigning crew member ID${id} from job`)
+        console.log(error)
+    }
+}
 
   render() {
     if (!this.state.crew) {
@@ -47,6 +59,7 @@ class Dashboard extends Component {
               projects={this.state.projects}
               projectInView={this.state.projectInView}
               crew={this.state.crew}
+              unassignCrewMember={this.unassignCrewMember}
             />
           </section>
         </div>
