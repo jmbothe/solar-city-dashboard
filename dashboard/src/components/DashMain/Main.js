@@ -12,6 +12,7 @@ class DashMain extends Component {
         assignCrewMember={this.props.assignCrewMember}
         updateNotes={this.props.updateNotes}
         changeNotes={this.props.changeNotes}
+        toggleMilestone={this.props.toggleMilestone}
       />
     )
   }

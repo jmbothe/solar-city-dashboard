@@ -59,10 +59,10 @@ class Dashboard extends Component {
       const crew = [...this.state.crew];
       crew.find(member => member.employeeId == id).assignedTo = projectId;
       this.setState({crew});
-  } catch (error) {
+    } catch (error) {
       console.log(`Error unassigning crew member ID${id} from job`)
       console.log(error)
-  }
+    }
   }
 
   updateNotes = async (id) => {
@@ -81,6 +81,28 @@ class Dashboard extends Component {
       console.log(`error updating notes for project ${id}`)
     }
   }
+
+    toggleMilestone = async (id, milestone) => {
+      try {
+        // const notes = JSON.stringify(this.state.projects.find(project => project.projectId == id).notes);
+        // console.log(notes)
+        // await fetch(`http://localhost:8080/projects/edit-notes/${id}`, {
+        //   method: 'PATCH',
+        //   body: notes,
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //     'Access-Control-Allow-Origin':'*'
+        //   },
+        // })
+        const projects = [...this.state.projects];
+        const project = projects.find(project => project.projectId == id)
+        project[milestone] = !project[milestone];
+
+        this.setState({projects});
+      } catch (error) {
+        console.log(`error updating milestone for project ${id}`)
+      }
+    }
 
   changeNotes = (id, updatedNote) => {
     const projects = [...this.state.projects];
@@ -101,7 +123,12 @@ class Dashboard extends Component {
     return (
       <div className="dashboard-wrapper">
         <header className="main-header">
+        <div>
           <h1>Solar City Project Manager Dashboard</h1>
+          </div>
+                <div>
+        <h2>Region {this.state.region.id}, {this.state.region.name}</h2>
+      </div>
         </header>
         <section className="dashboard">
             <Sidebar
@@ -119,6 +146,7 @@ class Dashboard extends Component {
               assignCrewMember={this.assignCrewMember}
               updateNotes={this.updateNotes}
               changeNotes={this.changeNotes}
+              toggleMilestone={this.toggleMilestone}
             />
           </section>
         </div>

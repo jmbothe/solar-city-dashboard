@@ -7,17 +7,14 @@ class RegionDetails extends Component {
     const cm = this.props.management.constructionManager;
 
     return (
-      <header>
-      {/* <section>
-        <h2>Region: {this.props.region.id}, {this.props.region.name}</h2>
-      </section> */}
       <section>
-        <h3>Management Team</h3>
         <ul className="team-ul">
           <li>
-            Project Manager: {pm.firstName} {pm.lastName}
+            <span>Project Manager:</span>
             <br/>
-              {pm.phoneNumber}
+            {pm.firstName} {pm.lastName}
+            <br/>
+            {pm.phoneNumber}
             <br/>
               {
                 <a
@@ -29,9 +26,11 @@ class RegionDetails extends Component {
               }
             </li>
           <li>
-            Project Coordinator: {pc.firstName} {pc.lastName}
+            <span>Project Coordinator:</span>
             <br/>
-              {pc.phoneNumber}
+            {pc.firstName} {pc.lastName}
+            <br/>
+            {pc.phoneNumber}
             <br/>
               {
                 <a
@@ -43,9 +42,9 @@ class RegionDetails extends Component {
               }
             </li>
           <li>
-            Construction Manager: {cm.firstName} {cm.lastName}
+            <span>Construction Manager:</span><br/>{cm.firstName} {cm.lastName}
             <br/>
-              {cm.phoneNumber}
+            {cm.phoneNumber}
             <br/>
               {
                 <a
@@ -58,7 +57,6 @@ class RegionDetails extends Component {
             </li>
         </ul>
       </section>
-    </header>
     )
   }
 }

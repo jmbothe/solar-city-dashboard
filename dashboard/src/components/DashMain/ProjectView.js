@@ -7,7 +7,10 @@ class ProjectView extends Component {
   render() { 
     return (
       <section className="project-view">
-        <ProjectTimeline />
+        <ProjectTimeline
+          project={this.props.project}
+          toggleMilestone={this.props.toggleMilestone}
+        />
         <ProjectTiles
           project={this.props.project}
           crew={this.props.crew}
