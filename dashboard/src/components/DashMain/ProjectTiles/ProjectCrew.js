@@ -1,42 +1,33 @@
 import React, { Component } from 'react';
+import CrewList from './CrewList'
+import AssignmentView from './AssignmentView'
 
 class ProjectCrew extends Component {
-  
-  handleClick = (id) => {
-    this.props.unassignCrewMember(id);
+  state = {
+    assignmentView: false
   }
 
-  render() { 
+  toggleAssignmentView = () => {
+    this.setState({assignmentView: !this.state.assignmentView})
+  }
+
+  render() {
+    if (this.state.assignmentView) {
+      return (
+        <AssignmentView
+          project={this.props.project}
+          crew={this.props.crew.filter(member => !member.assignedTo)}
+          assignCrewMember={this.props.assignCrewMember}
+          toggleAssignmentView={this.toggleAssignmentView}
+        />
+      )
+    }
     return (
-      <section>
-        <h3>Crew</h3>
-        <ul>
-          {this.props.crew.map(member =>
-           
-            <li
-              key={member.employeeId}
-              className="crew-list-item"
-            >
-              <div>
-                {member.employeeId} {member.firstName} {member.lastName}
-                <br/>
-                {member.phoneNumber}
-                {
-                  <a
-                    href={`mailto:${member.email}`}
-                    target="_blank" rel="noopener noreferrer"
-                    >
-                      {member.email}
-                  </a>
-                }
-                </div>
-              <div>
-                <button onClick={() => this.handleClick(member.employeeId)}>Remove</button>
-              </div>
-            </li>
-          )}
-        </ul>
-      </section>
+      <CrewList
+        crew={this.props.crew.filter(member => member.assignedTo == this.props.project.projectId)}
+        unassignCrewMember={this.props.unassignCrewMember}
+        toggleAssignmentView={this.toggleAssignmentView}
+      />
     )
   }
 }

@@ -3,12 +3,19 @@
   border: 1px solid black;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
-  display: flex;
-  flex-direction: column;
+  height: 100vh;
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+h2 {
+  font-size: 1.4rem;
 }
 
 ul {
@@ -16,22 +23,51 @@ ul {
   padding: 0;
 }
 
+#root {
+  height: 100%;
+}
+
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .dashboard {
   display: flex;
+  height: 100%;
+}
+
+.sidebar {
+  width: 20%;
 }
 
 .project-view {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 80%;
+  height: 100%;
 }
 
 .project-tiles {
   display: flex;
+  height: 100%;
 }
 
 .project-tiles > section {
-  flex-grow: 1;
+  width: 33.333%;
+}
+
+.crew-list-tile {
+  display: flex;
+  flex-direction: column;
+}
+
+.crew-list-wrapper {
+  overflow-y: auto;
+}
+
+.crew-list {
 }
 
 .crew-list-item {

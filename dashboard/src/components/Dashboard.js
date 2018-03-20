@@ -45,6 +45,24 @@ class Dashboard extends Component {
     }
   }
 
+  assignCrewMember = async (id, projectId) => {
+    try {
+      await fetch(`/employees/unassing/${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({assignedTo: projectId}),
+        headers: {
+        'content-type': 'application/json'
+        },
+      });
+      const crew = [...this.state.crew];
+      crew.find(member => member.employeeId == id).assignedTo = projectId;
+      this.setState({crew});
+  } catch (error) {
+      console.log(`Error unassigning crew member ID${id} from job`)
+      console.log(error)
+  }
+  }
+
   updateNotes = async (id) => {
     try {
       const notes = this.projects.find(project => project.projectId == id).notes;
@@ -94,6 +112,7 @@ class Dashboard extends Component {
               projectInView={this.state.projectInView}
               crew={this.state.crew}
               unassignCrewMember={this.unassignCrewMember}
+              assignCrewMember={this.assignCrewMember}
               updateNotes={this.updateNotes}
               changeNotes={this.changeNotes}
             />

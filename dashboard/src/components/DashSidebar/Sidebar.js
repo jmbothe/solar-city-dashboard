@@ -6,7 +6,7 @@ class DashSidebar extends Component {
   state = {}
   render() {
     return (
-      <nav>
+      <nav className="sidebar">
       <RegionDetails
         region={this.props.region}
         management={this.props.management}

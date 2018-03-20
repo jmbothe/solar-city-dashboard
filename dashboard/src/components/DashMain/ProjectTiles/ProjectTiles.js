@@ -13,8 +13,10 @@ class ProjectTiles extends Component {
           crew={this.props.crew}
         />
         <ProjectCrew
+          project={this.props.project}
           crew={this.props.crew}
           unassignCrewMember={this.props.unassignCrewMember}
+          assignCrewMember={this.props.assignCrewMember}
         />
         <ProjectNotes
           project={this.props.project}

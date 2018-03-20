@@ -5,7 +5,7 @@ class ProjectsList extends Component {
   render() { 
     return (
       <section>
-        <h2>Projects</h2>
+        <h3>Projects</h3>
         <ul>
           {this.props.projects.map(project => {
             return (

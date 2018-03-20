@@ -12,7 +12,7 @@ class RegionDetails extends Component {
         <h2>Region: {this.props.region.id}, {this.props.region.name}</h2>
       </section>
       <section>
-        <h2>Management Team</h2>
+        <h3>Management Team</h3>
         <ul>
           <li>
             Project Manager: {pm.firstName} {pm.lastName}
