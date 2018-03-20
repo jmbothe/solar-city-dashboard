@@ -34,13 +34,13 @@ class DashSidebar extends Component {
             onClick={this.disableProjectListView}
             className={this.state.projectListView ? 'light-grey inset-shadow-left' : '' }
           >
-            <h2 >Core Team</h2>
+            <h3>Core Team</h3>
           </div>
           <div
             onClick={this.enableProjectListView}
             className={this.state.projectListView ? '' : 'light-grey inset-shadow-right' }
           >
-            <h2>Projects</h2>
+            <h3>Projects</h3>
           </div>
         </header>
        {content}

@@ -13,13 +13,18 @@ body {
 }
 
 .main-header {
-  color: #0097A7
+  display: flex;
+  justify-content: center;
+  color: #0097A7;
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin: .5%;
-  padding: .5% 0;
+  display: block;
+  width: 60%;
+  background-color: #0097A7;
+  margin: 0;
+  padding: 1%; 
+  color: #B2EBF2;
 }
 
 h2 {
@@ -28,10 +33,12 @@ h2 {
 }
 
 .main-header h2 {
+  display: block;
+  width: 40%;
   background-color: #0097A7;
-  margin: .5% 0 0;
-  padding: .5%; 
-  color: #B2EBF2;
+  margin: 0;
+  padding-top: 1.25%; 
+  color:  #B2EBF2;
 }
 
 ul {
@@ -63,7 +70,7 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 3% 2%;
+  padding: 4% 2%;
   width: 50%;
   cursor: pointer;
 }
@@ -72,12 +79,12 @@ ul {
   color: white;
 }
 
-.sidebar h2 {
+.sidebar h3 {
   margin: 0;
 }
 
 .light-grey {
-  background-color: #bbb;
+  background-color: #aaa;
 }
 
 .inset-shadow-right {
@@ -109,7 +116,10 @@ ul {
 
 .milestone-header > div {
   border-right: solid 1px #999;
-  
+}
+
+.milestone-header > div:last-of-type {
+  border-right: none;
 }
 
 .milestone-container {
@@ -139,10 +149,6 @@ ul {
 .milestone-container > div input {
   width: 30%;
   outline: none;
-}
-
-.projects-list-ul li {
-  /* border-bottom: 1px solid #111; */
 }
 
 .projects-list-ul button {
@@ -179,6 +185,9 @@ ul {
   width: 33.333%;
   border-right: 1px solid #999;
   padding: 1%;
+}
+.project-tiles > section:last-of-type {
+  border-right: none;
 }
 
 .tile-heading {
