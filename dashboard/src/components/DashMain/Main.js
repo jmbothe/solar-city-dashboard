@@ -9,7 +9,6 @@ class DashMain extends Component {
         projectInView={this.props.projectInView}
         project={this.props.projectInView}
         crew={this.props.crew}
-        unassignCrewMember={this.props.unassignCrewMember}
         assignCrewMember={this.props.assignCrewMember}
         updateNotes={this.props.updateNotes}
         changeNotes={this.props.changeNotes}

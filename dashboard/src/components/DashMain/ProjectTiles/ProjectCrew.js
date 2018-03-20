@@ -25,7 +25,7 @@ class ProjectCrew extends Component {
     return (
       <CrewList
         crew={this.props.crew.filter(member => member.assignedTo == this.props.projectInView.projectId)}
-        unassignCrewMember={this.props.unassignCrewMember}
+        assignCrewMember={this.props.assignCrewMember}
         toggleAssignmentView={this.toggleAssignmentView}
       />
     )

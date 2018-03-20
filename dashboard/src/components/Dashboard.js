@@ -7,6 +7,7 @@ class Dashboard extends Component {
     region: {id: 1, name: "Mid-Atlantic"},
   }
 
+  // Set initial state based on employees and projects from Region
   async componentDidMount() {
     try {
       const employeesResponse = await fetch(`http://localhost:8080/employees/by-region/${this.state.region.id}`);
@@ -28,23 +29,8 @@ class Dashboard extends Component {
     }
   }
 
-  unassignCrewMember = async (id) => {
-    try {
-        await fetch(`http://localhost:8080/employees/assign/${id}`, {
-          method: 'PATCH',
-          body: JSON.stringify({assignedTo: null}),
-          headers: {'Content-Type': 'application/json'},
-        });
-        const crew = [...this.state.crew];
-        crew.find(member => member.employeeId == id).assignedTo = null;
-        this.setState({crew});
-    } catch (error) {
-        console.log(`Error unassigning crew member ID${id} from job`)
-        console.log(error)
-    }
-  }
-
-  assignCrewMember = async (id, projectId) => {
+  // Add or Remove crew member to/from assigned job
+  assignCrewMember = async (id, projectId = null) => {
     try {
       await fetch(`http://localhost:8080/employees/assign/${id}`, {
         method: 'PATCH',
@@ -127,7 +113,6 @@ class Dashboard extends Component {
               projects={this.state.projects}
               projectInView={this.state.projectInView}
               crew={this.state.crew}
-              unassignCrewMember={this.unassignCrewMember}
               assignCrewMember={this.assignCrewMember}
               updateNotes={this.updateNotes}
               changeNotes={this.changeNotes}

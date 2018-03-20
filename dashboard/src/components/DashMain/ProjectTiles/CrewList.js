@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class CrewList extends Component {
 
   handleUnassignClick = (id) => {
-    this.props.unassignCrewMember(id);
+    this.props.assignCrewMember(id);
   }
   
   render() { 

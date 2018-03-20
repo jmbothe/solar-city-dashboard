@@ -15,7 +15,6 @@ class ProjectTiles extends Component {
         <ProjectCrew
           projectInView={this.props.projectInView}
           crew={this.props.crew}
-          unassignCrewMember={this.props.unassignCrewMember}
           assignCrewMember={this.props.assignCrewMember}
         />
         <ProjectNotes
