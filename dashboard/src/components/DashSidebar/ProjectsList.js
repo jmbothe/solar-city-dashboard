@@ -12,7 +12,8 @@ class ProjectsList extends Component {
               <button
                 onClick={() => this.props.changeProjectInView(project.projectId)}
               >
-              {project.client} {project.projectName}
+                <span>{project.client} {project.projectName}</span>
+                <span className="arrow">{this.props.projectInView == project ? '→' : '' }</span>
               </button>
               </li>
             )

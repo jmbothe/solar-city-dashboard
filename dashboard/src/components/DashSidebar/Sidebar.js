@@ -18,6 +18,7 @@ class DashSidebar extends Component {
   render() {
     const content = (this.state.projectListView)
     ? <ProjectsList
+        projectInView={this.props.projectInView}
         projects={this.props.projects}
         changeProjectInView={this.props.changeProjectInView}
       />
@@ -31,13 +32,13 @@ class DashSidebar extends Component {
         <header>
           <div
             onClick={this.disableProjectListView}
-            className={this.state.projectListView ? 'light-grey' : '' }
+            className={this.state.projectListView ? 'light-grey inset-shadow-left' : '' }
           >
             <h2 >Core Team</h2>
           </div>
           <div
             onClick={this.enableProjectListView}
-            className={this.state.projectListView ? '' : 'light-grey' }
+            className={this.state.projectListView ? '' : 'light-grey inset-shadow-right' }
           >
             <h2>Projects</h2>
           </div>

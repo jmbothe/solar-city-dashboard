@@ -77,9 +77,24 @@ ul {
   background-color: #aaa;
 }
 
+.inset-shadow-right {
+  box-shadow: inset 3px -3px 8px #555;
+}
+
+.inset-shadow-left {
+  box-shadow: inset -3px -3px 8px #555;
+}
+
 .team-ul li {
   padding: 5% 2%;
   border-bottom: 1px solid #111;
+}
+
+.arrow {
+  font-size: 1.2rem;
+  font-weight: 900;
+  float: right;
+  text-align: right;
 }
 
 .milestone-header {
