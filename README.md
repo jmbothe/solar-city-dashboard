@@ -20,10 +20,8 @@ Solar City's situation presents a perfect case for the implementation of microse
 
 ## Install and Testdrive
 
-This project depends upon node.js, docker, and docker-compose. Make sure you have all of these dependencies installed before you proceed.
+This project depends upon docker and docker-compose. Make sure you have all of these dependencies installed before you proceed.
 
 1. Clone this repo to your local machine.
-2. From the comman line, from the `dashboard` directory, run `npm install` to setup the React frontend.
-3. In a separate comman line window, from the top-level project directory run `docker-compose up`.
-4. Back in the first command line window, from the `dashboard` directory, run `npm start`.
-5. A new browser window should automatically open, but if it doesn't, navigate to `http://localhost:3000` in your browser and enjoy the app!
+2. In a command line window, from the top-level project directory run `docker-compose up`.
+3. Once all of the containers are up and running (wait about 1 minute) navigate to `http://localhost:3000` in your browser and enjoy the app!
