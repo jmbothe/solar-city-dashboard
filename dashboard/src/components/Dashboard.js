@@ -46,12 +46,15 @@ class Dashboard extends Component {
     }
   }
 
+  // Edit notes in State only for each keystroke
   changeNotes = (id, updatedNote) => {
     const projects = [...this.state.projects];
     projects.find(project => project.projectId == id).notes = updatedNote;
     this.setState({ projects });
   }
 
+  // PATCH notes to backend on blur
+  // TODO: if user leaves page before blur, notes dont get saved
   updateNotes = async (id) => {
     try {
       const notes = JSON.stringify(this.state.projects.find(project => project.projectId == id).notes);
@@ -65,11 +68,12 @@ class Dashboard extends Component {
     }
   }
 
-  toggleMilestone = async (id, milestone) => {
+  // response to user interaction with timeline in project view
+  toggleMilestone = async (id, milestoneName) => {
     try {
       const projects = [...this.state.projects];
       const project = projects.find(project => project.projectId == id)
-      project[milestone] = !project[milestone];
+      project[milestoneName] = !project[milestoneName];
       const response = await fetch(`http://localhost:8080/projects/toggle-milestones/${id}`, {
         method: 'PATCH',
         body: JSON.stringify(project),
@@ -81,6 +85,7 @@ class Dashboard extends Component {
     }
   }
 
+  // respond to user interaction with sidebar
   changeProjectInView = (id) => {
     this.setState({
       projectInView: this.state.projects.find(project => project.projectId == id)
@@ -88,20 +93,15 @@ class Dashboard extends Component {
   }
 
   render() {
-    if (!this.state.crew) {
-      return <div></div>
-    } else {
-    return (
-      <div className="dashboard-wrapper">
-        <header className="main-header">
-        <div>
-          <h1>Solar City Project Manager Dashboard</h1>
-          </div>
-                <div>
-        <h2>Region {this.state.region.id}, {this.state.region.name}</h2>
-      </div>
-        </header>
-        <section className="dashboard">
+    return !this.state.crew
+      ? <div></div>
+      : (
+        <div className="dashboard-wrapper">
+          <header className="main-header">
+            <h1>Solar City Project Manager Dashboard</h1>
+            <h2>Region {this.state.region.id}, {this.state.region.name}</h2>
+          </header>
+          <section className="dashboard">
             <Sidebar
               region={this.state.region}
               management={this.state.management}
@@ -121,7 +121,6 @@ class Dashboard extends Component {
           </section>
         </div>
       )
-    }
   }
 }
  

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class CrewList extends Component {
 
-  handleUnassignClick = (id) => {
+  handleClick = (id) => {
     this.props.assignCrewMember(id);
   }
   
@@ -42,7 +42,7 @@ class CrewList extends Component {
                   }
                   </div>
                 <div className="crew-list-item-button-wrapper">
-                  <button onClick={() => this.handleUnassignClick(member.employeeId)}>Remove</button>
+                  <button onClick={() => this.handleClick(member.employeeId)}>Remove</button>
                 </div>
               </li>
             )}

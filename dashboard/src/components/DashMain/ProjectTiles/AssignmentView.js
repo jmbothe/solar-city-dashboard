@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class AssignmentView extends Component {
   
-  handleAssignClick = (id, projectId) => {
+  handleClick = (id, projectId) => {
     this.props.assignCrewMember(id, projectId);
   }
 
@@ -42,7 +42,7 @@ class AssignmentView extends Component {
                   </div>
                 <div className="crew-list-item-button-wrapper">
                   <button
-                    onClick={() => this.handleAssignClick(member.employeeId, this.props.projectInView.projectId)}
+                    onClick={() => this.handleClick(member.employeeId, this.props.projectInView.projectId)}
                   >
                     Add
                   </button>

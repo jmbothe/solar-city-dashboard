@@ -12,15 +12,27 @@ class ProjectTimeline extends Component {
     }
   }
 
+  formatDate = (date) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+
+    month = month.length < 2 ? '0' + month : month;
+    day = day.length < 2 ? '0' + day : day;
+
+    return [month, day, year].join('-');
+  }
+  
   render() {
     const p = this.props.projectInView;
     const data =[
-      ['Survey', p.dateSurvey, p.surveyComplete, 'surveyComplete'],
-      ['Contract', p.dateContract, p.contractSigned, 'contractSigned'],
-      ['Construction', p.dateStartConstruction, p.constructionStarted, 'constructionStarted'],
-      ['Interconnection', p.dateInterconnection, p.interconnected, 'interconnected'],
-      ['Operable', p.dateOperable, p.operable, 'operable'],
-      ['Commission', p.dateCommission, p.commissioned, 'commissioned']
+      ['Survey', 'surveyComplete', 'dateSurvey'],
+      ['Contract', 'contractSigned', 'dateContract'],
+      ['Construction', 'constructionStarted', 'dateStartConstruction'],
+      ['Interconnection', 'interconnected', 'dateInterconnection'],
+      ['Operable', 'operable', 'dateOperable'],
+      ['Commission', 'commissioned', 'dateCommission']
     ]
     return (
       <header className="milestone-header">
@@ -34,12 +46,12 @@ class ProjectTimeline extends Component {
                 <span className="milestone-name">{set[0]}</span>
                 <input
                   type="checkbox"
-                  checked={!!set[2]}
-                  onChange={() => this.props.toggleMilestone(p.projectId, set[3])}  
+                  checked={!!p[set[1]]}
+                  onChange={() => this.props.toggleMilestone(p.projectId, set[1])}  
                 />
               </div>
-              <span className="milestone-date">{new Date(set[1]).toLocaleDateString()}</span>
-              <span>{this.getMilestoneStatus(set[1], set[2])}</span>
+              <span className="milestone-date">{this.formatDate(p[set[2]])}</span>
+              <span>{this.getMilestoneStatus(p[set[2]], p[set[1]])}</span>
             </div>
           )
         }

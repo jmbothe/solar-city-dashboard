@@ -6,11 +6,15 @@ class ProjectDetails extends Component {
     (this.props.projectInView.budget / (this.props.projectInView.megawatts * 1000000)).toFixed(2);
 
   getManHours = () => {
-    // get number of weeks, multiply by 40, multiply by crew.length
+    // get number of weeks from start construction to interconnection,
+    //multiply by 40 hrs per week, multiply by crew.length
     const p = this.props.projectInView;
-
-    const weeksToCompletion = (Date.parse(p.dateCommission) - Date.parse(p.dateSurvey)) / 6.048e+8;
+    const weeksToCompletion = (Date.parse(p.dateInterconnection) - Date.parse(p.dateStartConstruction)) / 6.048e+8;
     return Math.floor(weeksToCompletion * 40 * this.props.crew.length);
+  }
+
+  numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   render() {
@@ -27,9 +31,9 @@ class ProjectDetails extends Component {
           <li>Client: {p.client}</li>
           <li>Site Address:<br/>{p.address}<br />{p.city}, {p.zipcode}</li>
           <li>Megawatts: {p.megawatts}</li>
-          <li>Budget: {p.budget}</li>
+          <li>Budget: ${this.numberWithCommas(p.budget)}</li>
           <li>$/W: {this.getCostPerWatt()}</li>
-          <li>Projected Man Hours: {this.getManHours()}</li>
+          <li>Projected Man Hours: {this.numberWithCommas(this.getManHours())}</li>
           <li><a href={p.linkPlans} target="_blank" rel="noopener noreferrer">Design Plan</a></li>
           <li><a href={p.linkContract} target="_blank" rel="noopener noreferrer">Contract</a></li>
           <li><a href={p.linkEnvImpactReport} target="_blank" rel="noopener noreferrer">Environmental Impact Report</a></li>
