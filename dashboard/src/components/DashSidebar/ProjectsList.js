@@ -6,7 +6,7 @@ class ProjectsList extends Component {
     return (
       <section>
         <h3>Projects</h3>
-        <ul>
+        <ul className="projects-list-ul">
           {this.props.projects.map(project => {
             return (
               <li key={project.projectId}>

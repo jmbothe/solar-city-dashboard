@@ -8,12 +8,12 @@ class RegionDetails extends Component {
 
     return (
       <header>
-      <section>
+      {/* <section>
         <h2>Region: {this.props.region.id}, {this.props.region.name}</h2>
-      </section>
+      </section> */}
       <section>
         <h3>Management Team</h3>
-        <ul>
+        <ul className="team-ul">
           <li>
             Project Manager: {pm.firstName} {pm.lastName}
             <br/>

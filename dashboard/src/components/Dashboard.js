@@ -9,9 +9,9 @@ class Dashboard extends Component {
 
   async componentDidMount() {
     try {
-      const employeesResponse = await fetch(`/employees/by-region/${this.state.region.id}`);
+      const employeesResponse = await fetch(`http://localhost:8080/employees/by-region/${this.state.region.id}`);
       const employees = await employeesResponse.json();
-      const projectsResponse = await fetch(`/projects/by-region/${this.state.region.id}`)
+      const projectsResponse = await fetch(`http://localhost:8080/projects/by-region/${this.state.region.id}`)
       const projects = await projectsResponse.json();
 
       const management = {
@@ -29,13 +29,14 @@ class Dashboard extends Component {
 
   unassignCrewMember = async (id) => {
     try {
-        await fetch(`/employees/unassing/${id}`, {
-          method: 'PATCH',
-          body: JSON.stringify({assignedTo: null}),
-          headers: {
-          'content-type': 'application/json'
-          },
-        });
+        // await fetch(`http://localhost:8081/unassing/${id}`, {
+        //   method: 'PATCH',
+        //   body: JSON.stringify({assignedTo: null}),
+        //   headers: {
+        //   'Content-Type': 'application/json',
+        //   'Access-Control-Allow-Origin':'*'
+        //   },
+        // });
         const crew = [...this.state.crew];
         crew.find(member => member.employeeId == id).assignedTo = null;
         this.setState({crew});
@@ -47,13 +48,14 @@ class Dashboard extends Component {
 
   assignCrewMember = async (id, projectId) => {
     try {
-      await fetch(`/employees/unassing/${id}`, {
-        method: 'PATCH',
-        body: JSON.stringify({assignedTo: projectId}),
-        headers: {
-        'content-type': 'application/json'
-        },
-      });
+    //   await fetch(`http://localhost:8080/employees/unassing/${id}`, {
+    //     method: 'PATCH',
+    //     body: JSON.stringify({assignedTo: projectId}),
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'Access-Control-Allow-Origin':'*'
+    //     },
+    //   });
       const crew = [...this.state.crew];
       crew.find(member => member.employeeId == id).assignedTo = projectId;
       this.setState({crew});
@@ -65,14 +67,16 @@ class Dashboard extends Component {
 
   updateNotes = async (id) => {
     try {
-      const notes = this.projects.find(project => project.projectId == id).notes;
-      await fetch(`/projects/edit-notes/${id}`, {
-        method: 'PATCH',
-        body: JSON.stringify(notes),
-        headers: {
-          'content-type': 'application/json'
-        },
-      })
+      // const notes = JSON.stringify(this.state.projects.find(project => project.projectId == id).notes);
+      // console.log(notes)
+      // await fetch(`http://localhost:8080/projects/edit-notes/${id}`, {
+      //   method: 'PATCH',
+      //   body: notes,
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Access-Control-Allow-Origin':'*'
+      //   },
+      // })
     } catch (error) {
       console.log(`error updating notes for project ${id}`)
     }
@@ -96,7 +100,7 @@ class Dashboard extends Component {
     } else {
     return (
       <div className="dashboard-wrapper">
-        <header>
+        <header className="main-header">
           <h1>Solar City Project Manager Dashboard</h1>
         </header>
         <section className="dashboard">

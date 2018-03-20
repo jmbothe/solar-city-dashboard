@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  border: 1px solid black;
 }
 
 html {
@@ -12,6 +11,12 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+.main-header {
+  background-color: #8BC34A;
+  box-shadow: 10px 10px 10px #ccc;
+  color: white;
 }
 
 h2 {
@@ -40,6 +45,37 @@ ul {
 
 .sidebar {
   width: 20%;
+  padding: 1%;
+  background-color: #757575;
+  color: white;
+  box-shadow: 10px 10px 10px #ccc;
+}
+
+.sidebar a {
+  color: white;
+}
+
+.sidebar h2 {
+  margin: 0;
+}
+
+.team-ul li {
+  padding: 3% 0;
+  border-bottom: 1px solid #111;
+}
+
+.projects-list-ul li {
+  padding: 3% 0;
+  border-bottom: 1px solid #111;
+}
+
+.projects-list-ul button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1rem;
+  color: white;
 }
 
 .project-view {
@@ -47,6 +83,7 @@ ul {
   flex-direction: column;
   width: 80%;
   height: 100%;
+  padding: 1%;
 }
 
 .project-tiles {
@@ -55,12 +92,23 @@ ul {
 }
 
 .project-tiles > section {
-  width: 33.333%;
-}
-
-.crew-list-tile {
   display: flex;
   flex-direction: column;
+  width: 33.333%;
+  border-right: 1px solid #999;
+  padding: 1%;
+}
+
+.tile-heading {
+  padding: 0 5%;
+  background-color: #00BCD4;
+  color: #444;
+  box-shadow: 5px 5px 5px #ccc;
+}
+
+.project-details-tile li {
+  padding: 3% 0;
+  border-bottom: 1px solid #999;
 }
 
 .crew-list-wrapper {
@@ -68,8 +116,50 @@ ul {
 }
 
 .crew-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.crew-toggle-container {
+  display: flex;
+  align-items: center;
+  padding: 10% 0;
+}
+
+.crew-list-tile > div > button {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1rem;
 }
 
 .crew-list-item {
   display: flex;
+  justify-content: space-between;
+  padding: 3% 0;
+  border-bottom: 1px solid #999;
+}
+
+.crew-list-item-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.crew-list-item-button-wrapper button {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 1rem;
+
+}
+
+textarea {
+  width: 100%;
+  height: 400px;
+  margin-top: 10%;
 }

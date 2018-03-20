@@ -17,8 +17,10 @@ class ProjectDetails extends Component {
     const p = this.props.project;
 
     return (
-      <section>
+      <section className="project-details-tile">
+        <div className="tile-heading">
         <h3>Project Details</h3>
+        </div>
         <ul>
           <li>Project ID: {p.projectId}</li>
           <li>Project Name: {p.projectName}</li>
