@@ -13,7 +13,7 @@ class ProjectTimeline extends Component {
   }
 
   render() {
-    const p = this.props.project;
+    const p = this.props.projectInView;
     const data =[
       ['Survey', p.dateSurvey, p.surveyComplete, 'surveyComplete'],
       ['Contract', p.dateContract, p.contractSigned, 'contractSigned'],

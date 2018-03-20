@@ -6,6 +6,7 @@ class DashMain extends Component {
   render() { 
     return (
       <ProjectView
+        projectInView={this.props.projectInView}
         project={this.props.projectInView}
         crew={this.props.crew}
         unassignCrewMember={this.props.unassignCrewMember}

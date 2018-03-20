@@ -8,10 +8,11 @@ class ProjectView extends Component {
     return (
       <section className="project-view">
         <ProjectTimeline
-          project={this.props.project}
+          projectInView={this.props.projectInView}
           toggleMilestone={this.props.toggleMilestone}
         />
         <ProjectTiles
+          projectInView={this.props.projectInView}
           project={this.props.project}
           crew={this.props.crew}
           unassignCrewMember={this.props.unassignCrewMember}

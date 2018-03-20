@@ -3,18 +3,18 @@ import React, { Component } from 'react';
 class ProjectDetails extends Component {
 
   getCostPerWatt = () =>
-    (this.props.project.budget / (this.props.project.megawatts * 1000000)).toFixed(2);
+    (this.props.projectInView.budget / (this.props.projectInView.megawatts * 1000000)).toFixed(2);
 
   getManHours = () => {
     // get number of weeks, multiply by 40, multiply by crew.length
-    const p = this.props.project;
+    const p = this.props.projectInView;
 
     const weeksToCompletion = (Date.parse(p.dateCommission) - Date.parse(p.dateSurvey)) / 6.048e+8;
     return Math.floor(weeksToCompletion * 40 * this.props.crew.length);
   }
 
   render() {
-    const p = this.props.project;
+    const p = this.props.projectInView;
 
     return (
       <section className="project-details-tile">

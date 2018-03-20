@@ -83,22 +83,14 @@ public class EmployeesController {
         return HttpStatus.OK;
     }
     
-    @PatchMapping("/unassign/{id}")
-    public HttpStatus unassignEmployee(@PathVariable long id,  @RequestBody Employee employeeRequest) {
+    @PatchMapping("/assign/{id}")
+    public HttpStatus assignEmployee(@PathVariable long id,  @RequestBody Employee employeeRequest) {
         Employee employee = employeeRepository.findById(id).get();
         employee.setAssignedTo(employeeRequest.getAssignedTo());
         employeeRepository.save(employee);
         return HttpStatus.OK;
     }
 
-    @PatchMapping("/assign/{id}")
-    public HttpStatus assignEmployee(@PathVariable long id, @RequestBody Employee employeeRequest) {
-        Employee employee = employeeRepository.findById(id).get();
-        employee.setAssignedTo(employeeRequest.getAssignedTo());
-        employeeRepository.save(employee);
-        return HttpStatus.OK;
-    }
-    
     @DeleteMapping("/delete/{id}")
     public HttpStatus deleteUserById(@PathVariable Long id) {
         employeeRepository.deleteById(id);

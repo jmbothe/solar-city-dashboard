@@ -6,7 +6,9 @@ class ProjectsList extends Component {
     return (
       <section>
         <ul className="projects-list-ul">
-          {this.props.projects.map(project => {
+          {this.props.projects
+          .sort((a, b) => a.projectId - b.projectId)
+          .map(project => {
             return (
               <li key={project.projectId}>
               <button

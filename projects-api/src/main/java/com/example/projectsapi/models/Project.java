@@ -3,6 +3,8 @@ package com.example.projectsapi.models;
 
 import javax.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Type;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -59,21 +61,27 @@ public class Project implements Serializable {
     @Column(name = "DATE_COMMISSION")
     private Date dateCommission;
 
+    @Type(type="boolean")
     @Column(name = "SURVEY_COMPLETE")
     private boolean surveyComplete;
 
+    @Type(type="boolean")
     @Column(name = "CONTRACT_SIGNED")
     private boolean contractSigned;
 
+    @Type(type="boolean")
     @Column(name = "CONSTRUCTION_STARTED")
     private boolean constructionStarted;
 
+    @Type(type="boolean")
     @Column(name = "INTERCONNECTED")
     private boolean interconnected;
 
+    @Type(type="boolean")
     @Column(name = "OPERABLE")
     private boolean operable;
 
+    @Type(type="boolean")
     @Column(name = "COMMISSIONED")
     private boolean commissioned;
 

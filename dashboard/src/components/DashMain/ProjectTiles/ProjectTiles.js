@@ -8,18 +8,18 @@ class ProjectTiles extends Component {
   render() { 
     return (
       <section className="project-tiles">
-        <ProjectDetails 
-          project={this.props.project}
+        <ProjectDetails
+          projectInView={this.props.projectInView}
           crew={this.props.crew}
         />
         <ProjectCrew
-          project={this.props.project}
+          projectInView={this.props.projectInView}
           crew={this.props.crew}
           unassignCrewMember={this.props.unassignCrewMember}
           assignCrewMember={this.props.assignCrewMember}
         />
         <ProjectNotes
-          project={this.props.project}
+          projectInView={this.props.projectInView}
           updateNotes={this.props.updateNotes}
           changeNotes={this.props.changeNotes}
         />

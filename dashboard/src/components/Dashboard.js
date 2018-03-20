@@ -12,7 +12,8 @@ class Dashboard extends Component {
       const employeesResponse = await fetch(`http://localhost:8080/employees/by-region/${this.state.region.id}`);
       const employees = await employeesResponse.json();
       const projectsResponse = await fetch(`http://localhost:8080/projects/by-region/${this.state.region.id}`)
-      const projects = await projectsResponse.json();
+      let projects = await projectsResponse.json();
+      projects = projects.sort((a, b) => a.projectId - b.projectId)
 
       const management = {
         projectManager: employees.find(employee => employee.position.id == 1),
@@ -29,14 +30,11 @@ class Dashboard extends Component {
 
   unassignCrewMember = async (id) => {
     try {
-        // await fetch(`http://localhost:8081/unassing/${id}`, {
-        //   method: 'PATCH',
-        //   body: JSON.stringify({assignedTo: null}),
-        //   headers: {
-        //   'Content-Type': 'application/json',
-        //   'Access-Control-Allow-Origin':'*'
-        //   },
-        // });
+        await fetch(`http://localhost:8080/employees/assign/${id}`, {
+          method: 'PATCH',
+          body: JSON.stringify({assignedTo: null}),
+          headers: {'Content-Type': 'application/json'},
+        });
         const crew = [...this.state.crew];
         crew.find(member => member.employeeId == id).assignedTo = null;
         this.setState({crew});
@@ -48,14 +46,11 @@ class Dashboard extends Component {
 
   assignCrewMember = async (id, projectId) => {
     try {
-    //   await fetch(`http://localhost:8080/employees/unassing/${id}`, {
-    //     method: 'PATCH',
-    //     body: JSON.stringify({assignedTo: projectId}),
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Access-Control-Allow-Origin':'*'
-    //     },
-    //   });
+      await fetch(`http://localhost:8080/employees/assign/${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({assignedTo: projectId}),
+        headers: {'Content-Type': 'application/json'},
+      });
       const crew = [...this.state.crew];
       crew.find(member => member.employeeId == id).assignedTo = projectId;
       this.setState({crew});
@@ -65,49 +60,39 @@ class Dashboard extends Component {
     }
   }
 
+  changeNotes = (id, updatedNote) => {
+    const projects = [...this.state.projects];
+    projects.find(project => project.projectId == id).notes = updatedNote;
+    this.setState({ projects });
+  }
+
   updateNotes = async (id) => {
     try {
-      // const notes = JSON.stringify(this.state.projects.find(project => project.projectId == id).notes);
-      // console.log(notes)
-      // await fetch(`http://localhost:8080/projects/edit-notes/${id}`, {
-      //   method: 'PATCH',
-      //   body: notes,
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Access-Control-Allow-Origin':'*'
-      //   },
-      // })
+      const notes = JSON.stringify(this.state.projects.find(project => project.projectId == id).notes);
+      await fetch(`http://localhost:8080/projects/edit-notes/${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({notes}),
+        headers: {'Content-Type': 'application/json'},
+      })
     } catch (error) {
       console.log(`error updating notes for project ${id}`)
     }
   }
 
-    toggleMilestone = async (id, milestone) => {
-      try {
-        // const notes = JSON.stringify(this.state.projects.find(project => project.projectId == id).notes);
-        // console.log(notes)
-        // await fetch(`http://localhost:8080/projects/edit-notes/${id}`, {
-        //   method: 'PATCH',
-        //   body: notes,
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //     'Access-Control-Allow-Origin':'*'
-        //   },
-        // })
-        const projects = [...this.state.projects];
-        const project = projects.find(project => project.projectId == id)
-        project[milestone] = !project[milestone];
-
-        this.setState({projects});
-      } catch (error) {
-        console.log(`error updating milestone for project ${id}`)
-      }
+  toggleMilestone = async (id, milestone) => {
+    try {
+      const projects = [...this.state.projects];
+      const project = projects.find(project => project.projectId == id)
+      project[milestone] = !project[milestone];
+      const response = await fetch(`http://localhost:8080/projects/toggle-milestones/${id}`, {
+        method: 'PATCH',
+        body: JSON.stringify(project),
+        headers: {'Content-Type': 'application/json'},
+      })
+      this.setState({projects});
+    } catch (error) {
+      console.log(`error updating milestone for project ${id}`)
     }
-
-  changeNotes = (id, updatedNote) => {
-    const projects = [...this.state.projects];
-    projects.find(project => project.projectId == id).notes = updatedNote;
-    this.setState({ projects });
   }
 
   changeProjectInView = (id) => {

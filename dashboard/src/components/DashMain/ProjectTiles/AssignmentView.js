@@ -42,7 +42,7 @@ class AssignmentView extends Component {
                   </div>
                 <div className="crew-list-item-button-wrapper">
                   <button
-                    onClick={() => this.handleAssignClick(member.employeeId, this.props.project.projectId)}
+                    onClick={() => this.handleAssignClick(member.employeeId, this.props.projectInView.projectId)}
                   >
                     Add
                   </button>
