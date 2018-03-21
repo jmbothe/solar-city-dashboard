@@ -38,4 +38,39 @@ it includes:
 * An interface for adding and removing crew members from projects.
 * A timeline view for tracking project progress, with an interface for marking project milestones as they are completed.
 
-![Dash](./dashboard/dash.jpg)
+![Dash](./dashboard/dash.gif)
+
+## Bonus Tutorial
+
+### How to add your React UI to your Docker-compose setup
+
+This is just a distillation of different sources I read, applied to the specific microservices pattern we've been learning.
+
+NOTE: in the following steps, wherever you see `dashboard`, replace that with the path of your React project folder, relative to your `docker-compose.yml` file.
+
+1. Add these lines to your `docker-compose.yml` file. The `depends_on` section will be different for you, depending on the names of your microservices.
+
+```
+  dashboard:
+    image: node:latest
+    build: ./dashboard
+    ports:
+      - 3000:3000
+    working_dir: /dashboard
+    volumes:
+      - ./dashboard:/dashboard
+    command: 'npm start'
+    depends_on:
+      - eureka
+      - postgresdev
+      - projects-api
+      - employees-api 
+```
+
+2. In your React project folder, create a new file called `.dockerignore`, and add these lines:
+
+```
+node_modules
+npm-debug.log
+```
+3. Thats it! run `docker-compose up` from your top-level project folder, wait for dependencies to download, and then access your frontend at `localhost:3000`.

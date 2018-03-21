@@ -59,12 +59,14 @@ services:
       - SPRING_PROFILES_ACTIVE=dev
 
   dashboard:
+    image: node:latest
     build: ./dashboard
     ports:
       - 3000:3000
+    working_dir: /dashboard
     volumes:
-      - ./dashboard/src:/dashboard/src
-      - ./dashboard/public:/dashboard/public
+      - ./dashboard:/dashboard
+    command: 'npm start'
     depends_on:
       - eureka
       - postgresdev
