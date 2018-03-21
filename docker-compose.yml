@@ -6,9 +6,9 @@ services:
     image: anapsix/alpine-java:8_jdk_unlimited
     ports:
       - '8761:8761'
-    working_dir: /app
+    working_dir: /service-registry
     volumes:
-      - ./service-registry:/app
+      - ./service-registry:/service-registry
     command: './gradlew bootRun'
     environment:
       - GRADLE_USER_HOME=cache
@@ -18,9 +18,9 @@ services:
     image: anapsix/alpine-java:8_jdk_unlimited
     ports:
       - '8080:8080'
-    working_dir: /app
+    working_dir: /api-gateway
     volumes:
-      - ./api-gateway:/app
+      - ./api-gateway:/api-gateway
     depends_on:
       - eureka
     command: './gradlew bootRun'
@@ -32,9 +32,9 @@ services:
     image: anapsix/alpine-java:8_jdk_unlimited
     ports:
       - '8081:8081'
-    working_dir: /app
+    working_dir: /employees-api
     volumes:
-      - ./employees-api:/app
+      - ./employees-api:/employees-api
     depends_on:
       - eureka
       - postgresdev
@@ -47,9 +47,9 @@ services:
     image: anapsix/alpine-java:8_jdk_unlimited
     ports:
       - '8082:8082'
-    working_dir: /app
+    working_dir: /projects-api
     volumes:
-      - ./projects-api:/app
+      - ./projects-api:/projects-api
     depends_on:
       - eureka
       - postgresdev
