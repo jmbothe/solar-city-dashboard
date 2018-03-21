@@ -4,15 +4,15 @@
 
 ### Client Problem Statement
 
-Solar City is the world's largest and fastest-growing solar panel installation company, with their commercial construction division showing the largest strides in growth over the past few years. As demand for larger and larger solar infrastructure projects grows, project managers are faced with a proportional increase in work load and complexity. At present, Solar City's commercial division has no organized system for project managers to track and update information relevant to the work under their purview. Instead, the tools currently available are distributed, incompatable, and outdated.
+Solar City is the world's largest and fastest-growing solar panel installation company, with their commercial construction division showing the largest strides in growth over the past few years. As demand for ever larger solar infrastructure projects grows, project managers are faced with a proportional increase in work load and complexity. At present, Solar City's commercial division has no organized system for project managers to track and update information relevant to the work under their purview. The company began as a residential solar panel installation business, and the new commerical division has out grown the borrowed management tools that were originally designed for residential operations. This lack of appropriate technical infrastructure creates extra work for management teams and introduces an unsustainable level of uncertainty and exposure to error.
 
 ### Proposed Solution and Technical Requirements
 
-The distributed nature of the current system is an artifact of the shape of underlying data. For instance, project data is owned and maintained by a different company department than employee data. To tackle the current problem and begin to pay off Solar City's resulting technical debt, it is recommended to create a system that provides centralized endpoints to access and modify data, updating the current systems and standardizing their I/O, while honoring the autonomy and modularity of these databases. The first phase of the project entails building a Java Spring Boot microservices environment to map the different data domains. Each domain will be encapsulated in an API and exposed to the environment through limited, standardized, well-documented routes. The system as a whole will be managed via an API gateway and and a service registry. ALl of these systems will be containerized and deployed to an elastic cloud computing service.
+The distributed nature of the current system is an artifact of the shape of the underlying data and the history of the company's growth. For instance, project data are owned and maintained by specific company departments, while other data like employee data are used by multiple departments across the organization. To tackle the current problem and begin to pay off Solar City's technical debt, it is recommended to create a system that provides centralized endpoints to access and modify data domains, update the current systems and standardize their I/O, all while honoring the autonomy and modularity of these domains. The first phase of the project entails building a Java Spring Boot microservices environment to map the different data domains. Each domain will be appropriately encapsulated and exposed to the environment through a limited, standardized, well-documented RESTful API. These API routes in turn will be managed via an API gateway and a service registry, which together will provide a single point of entry for a frontend client application. Once the backend domains are appropriately defined, a user interface for the client application will be built using React.js. All of these systems will be containerized and deployed to an elastic cloud computing service.
 
 ### In Defense of Microservices
 
-Solar City's situation presents a perfect case for the implementation of microservices architecture. While it may seem counter intuitive to propose keeping the databases modular, in the realm of microservices, a single monolithic database is considered an anti-pattern. In the quotes below, Netflix Director of Web Engineering Adrian Cockcroft describes the best practice for handling data stores in a microservices environment.
+Solar City's situation presents a perfect case for the implementation of microservices architecture. While it may seem counter intuitive to propose keeping the databases modular, in the realm of microservices the alternative, a single monolithic database, is considered an anti-pattern. In the quotes below, Netflix Director of Web Engineering Adrian Cockcroft describes the best practice for handling data stores in a microservices environment.
 
 >If you have a bunch of small, specialized services but still have to update them together, they’re not microservices because they’re not loosely coupled. One kind of coupling that people tend to overlook as they transition to a microservices architecture is database coupling, where all services talk to the same database and updating a service means changing the schema. You need to split the database up and denormalize it.
 >
@@ -25,3 +25,17 @@ This project depends upon docker and docker-compose. Make sure you have all of t
 1. Clone this repo to your local machine.
 2. In a command line window, from the top-level project directory run `docker-compose up`.
 3. Once all of the containers are up and running (wait about 1 minute) navigate to `http://localhost:3000` in your browser and enjoy the app!
+4. When you are finished testdriving the app, `ctrl + C` out of the terminal, and then run `docker-compose down` to remove the mounted docker images.
+
+## Features
+
+### The Solar City Commercial Project Manager Dashboard is a one-stop shop for all your project management needs.
+
+it includes:
+
+* A list of all current projects from within the project manager's scope.
+* A view of the details of each project, including size, budget, documents, constructions crew member info, and much more.
+* An interface for adding and removing crew members from projects.
+* A timeline view for tracking project progress, with an interface for marking project milestones as they are completed.
+
+![Dash](./dashboard/dash.jpg)

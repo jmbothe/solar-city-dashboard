@@ -29,7 +29,7 @@ class ProjectTimeline extends Component {
     const data =[
       ['Survey', 'surveyComplete', 'dateSurvey'],
       ['Contract', 'contractSigned', 'dateContract'],
-      ['Construction', 'constructionStarted', 'dateStartConstruction'],
+      ['Break Ground', 'constructionStarted', 'dateStartConstruction'],
       ['Interconnection', 'interconnected', 'dateInterconnection'],
       ['Operable', 'operable', 'dateOperable'],
       ['Commission', 'commissioned', 'dateCommission']

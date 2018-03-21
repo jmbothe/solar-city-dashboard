@@ -23,7 +23,7 @@ h1 {
   width: 60%;
   background-color: #0097A7;
   margin: 0;
-  padding: 1%; 
+  padding: .5%; 
   color: #B2EBF2;
 }
 
@@ -37,7 +37,8 @@ h2 {
   width: 40%;
   background-color: #0097A7;
   margin: 0;
-  padding-top: 1.25%; 
+  padding-top: 1%;
+  text-align: center; 
   color:  #B2EBF2;
 }
 
@@ -101,7 +102,6 @@ ul {
 }
 
 .arrow {
-  font-size: 1.2rem;
   font-weight: 900;
   float: right;
   text-align: right;
@@ -186,6 +186,7 @@ ul {
   border-right: 1px solid #999;
   padding: 1%;
 }
+
 .project-tiles > section:last-of-type {
   border-right: none;
 }
@@ -252,6 +253,8 @@ ul {
 
 textarea {
   width: 100%;
-  height: 100%;
+  height: 400px;
   margin-top: 10%;
+  outline: none;
+  resize: none;
 }
