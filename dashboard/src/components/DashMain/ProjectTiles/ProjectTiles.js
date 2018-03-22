@@ -10,7 +10,7 @@ class ProjectTiles extends Component {
       <section className="project-tiles">
         <ProjectDetails
           projectInView={this.props.projectInView}
-          crew={this.props.crew}
+          crew={this.props.crew.filter(member => member.assignedTo == this.props.projectInView.projectId)}
         />
         <ProjectCrew
           projectInView={this.props.projectInView}
