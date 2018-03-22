@@ -4,7 +4,7 @@
 
 ### Client Problem Statement
 
-Solar City is the world's largest and fastest-growing solar panel installation company, with their commercial construction division showing the largest strides in growth over the past few years. As demand for ever larger solar infrastructure projects grows, project managers are faced with a proportional increase in work load and complexity. At present, Solar City's commercial division has no organized system for project managers to track and update information relevant to the work under their purview. The company began as a residential solar panel installation business, and the new commerical division has out grown the borrowed management tools that were originally designed for residential operations. This lack of appropriate technical infrastructure creates extra work for management teams and introduces an unsustainable level of uncertainty and exposure to error.
+[Solar City](http://www.solarcity.com/) is the world's largest and fastest-growing solar panel installation company, with their commercial construction division showing the largest strides in growth over the past few years. As demand for ever larger solar infrastructure projects grows, project managers are faced with a proportional increase in work load and complexity. At present, Solar City's commercial division has no organized system for project managers to track and update information relevant to the work under their purview. The company began as a residential solar panel installation business, and the new commerical division has out grown the borrowed management tools that were originally designed for residential operations. This lack of appropriate technical infrastructure creates extra work for management teams and introduces an unsustainable level of uncertainty and exposure to error.
 
 ### Proposed Solution and Technical Requirements
 
@@ -20,12 +20,12 @@ Solar City's situation presents a perfect case for the implementation of microse
 
 ## Install and Testdrive
 
-This project depends upon docker and docker-compose. Make sure you have all of these dependencies installed before you proceed.
+This project depends upon [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/). Make sure you have all of these dependencies installed before you proceed.
 
-1. Clone this repo to your local machine.
-2. In a command line window, from the top-level project directory run `docker-compose up`.
-3. Once all of the containers are up and running (wait about 1 minute) navigate to `http://localhost:3000` in your browser and enjoy the app!
-4. When you are finished testdriving the app, `ctrl + C` out of the terminal, and then run `docker-compose down` to remove the mounted docker images.
+1. [Clone this repo](https://help.github.com/articles/cloning-a-repository/) to your machine.
+2. In a terminal window, from the top-level project directory run `docker-compose up`.
+3. Once all of the containers are up and running (wait about 1 minute) navigate to [http://localhost:3000](http://localhost:3000) in your browser and enjoy the app!
+4. When you are finished testdriving the app, in the terminal `ctrl + C` to stop the docker images, and then run `docker-compose down` to remove the mounted docker images.
 
 ## Features
 
@@ -73,4 +73,4 @@ NOTE: in the following steps, wherever you see `dashboard`, replace that with th
 node_modules
 npm-debug.log
 ```
-3. Thats it! run `docker-compose up` from your top-level project folder, wait for dependencies to download, and then access your frontend at `localhost:3000`.
+3. Thats it! run `docker-compose up` from your top-level project folder, wait for dependencies to download, and then access your frontend at [localhost:3000](http://localhost:3000).
