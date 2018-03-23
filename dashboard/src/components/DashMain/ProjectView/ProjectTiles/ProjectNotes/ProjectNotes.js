@@ -12,7 +12,7 @@ const ProjectNotes = ({
     <textarea rows="4" cols="50"
       onBlur={() => updateNotes(projectInView.projectId)}
       onChange={e => changeNotes(projectInView.projectId, e.target.value)}
-      value={projectInView.notes}
+      value={projectInView.notes || ''}
       placeholder='Put notes here' 
     >
     </textarea>

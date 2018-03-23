@@ -86,11 +86,10 @@ class Dashboard extends Component {
   }
 
   // respond to user interaction with sidebar
-  changeProjectInView = (id) => {
+  changeProjectInView = (id) =>
     this.setState({
       projectInView: this.state.projects.find(project => project.projectId == id)
     })
-  }
 
   // TODO: Incorporrate POST and DELETE routes to front end.
   // Those routes already exist on backend, but not being used here on the frontend
