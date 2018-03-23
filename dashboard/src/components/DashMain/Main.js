@@ -1,21 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ProjectView from './ProjectView';
 
-class DashMain extends Component {
-  state = {}
-  render() { 
-    return (
-      <ProjectView
-        projectInView={this.props.projectInView}
-        project={this.props.projectInView}
-        crew={this.props.crew}
-        assignCrewMember={this.props.assignCrewMember}
-        updateNotes={this.props.updateNotes}
-        changeNotes={this.props.changeNotes}
-        toggleMilestone={this.props.toggleMilestone}
-      />
-    )
-  }
-}
- 
+// TODO: Add CrewView: a list of all crew members, with functionality to fire/hire crew
+// Different from CrewList, which allows for adding/removing crew members to/from projects
+
+const DashMain = ({
+  projectInView,
+  crew,
+  assignCrewMember,
+  updateNotes,
+  changeNotes,
+  toggleMilestone
+}) =>
+  <ProjectView
+    projectInView={projectInView}
+    crew={crew}
+    assignCrewMember={assignCrewMember}
+    updateNotes={updateNotes}
+    changeNotes={changeNotes}
+    toggleMilestone={toggleMilestone}
+  />
+
 export default DashMain;

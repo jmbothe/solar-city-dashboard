@@ -1,22 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class ProjectNotes extends Component {
-  render() { 
-    return (
-      <section>
-        <div className="tile-heading">
-        <h3>Notes</h3>
-        </div>
-        <textarea rows="4" cols="50"
-          onBlur={() => this.props.updateNotes(this.props.projectInView.projectId)}
-          onChange={e => this.props.changeNotes(this.props.projectInView.projectId, e.target.value)}
-          value={this.props.projectInView.notes}
-          placeholder='Put notes here' 
-        >
-        </textarea>
-      </section>
-    )
-  }
-}
+const ProjectNotes = ({
+  updateNotes,
+  changeNotes,
+  projectInView
+}) =>
+  <section>
+    <div className="tile-heading">
+      <h3>Notes</h3>
+    </div>
+    <textarea rows="4" cols="50"
+      onBlur={() => updateNotes(projectInView.projectId)}
+      onChange={e => changeNotes(projectInView.projectId, e.target.value)}
+      value={projectInView.notes}
+      placeholder='Put notes here' 
+    >
+    </textarea>
+  </section>
  
 export default ProjectNotes;

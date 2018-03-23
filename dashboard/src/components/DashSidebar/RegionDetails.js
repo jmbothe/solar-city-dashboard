@@ -17,7 +17,7 @@ const RegionDetails = ({
           ['Project Coordinator', pc],
           ['Construction Manager', cm]
         ]
-        .map((manager) => <ManagementCard title={manager[0]} manager={manager[1]}/>)
+        .map((manager) => <ManagementCard key={manager[1].employeeId} title={manager[0]} manager={manager[1]}/>)
       }
     </ul>
   </section>

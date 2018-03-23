@@ -7,26 +7,27 @@ class ProjectCrew extends Component {
     assignmentView: false
   }
 
-  toggleAssignmentView = () => {
-    this.setState({assignmentView: !this.state.assignmentView})
-  }
+  toggleAssignmentView = () => 
+    this.setState({assignmentView: !this.state.assignmentView});
 
   render() {
-    if (this.state.assignmentView) {
-      return (
-        <AssignmentView
-          projectInView={this.props.projectInView}
-          crew={this.props.crew.filter(member => !member.assignedTo)}
-          assignCrewMember={this.props.assignCrewMember}
-          toggleAssignmentView={this.toggleAssignmentView}
-        />
-      )
-    }
+    const {
+      projectInView,
+      crew,
+      assignCrewMember
+    } = this.props;
+
     return (
       <CrewList
-        crew={this.props.crew.filter(member => member.assignedTo == this.props.projectInView.projectId)}
-        assignCrewMember={this.props.assignCrewMember}
+        crew={
+          this.state.assignmentView
+          ? crew.filter(member => !member.assignedTo)
+          : crew.filter(member => member.assignedTo == projectInView.projectId)
+          }
+        assignCrewMember={assignCrewMember}
         toggleAssignmentView={this.toggleAssignmentView}
+        assignmentView={this.state.assignmentView}
+        projectInView={projectInView}
       />
     )
   }

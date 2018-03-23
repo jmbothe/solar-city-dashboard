@@ -5,12 +5,12 @@ class ProjectDetails extends Component {
   getCostPerWatt = () =>
     (this.props.projectInView.budget / (this.props.projectInView.megawatts * 1000000)).toFixed(2);
 
+
+  // get number of weeks from start construction to interconnection,
+  //multiply by 40 hrs per week, multiply by crew.length
   getManHours = () => {
-    // get number of weeks from start construction to interconnection,
-    //multiply by 40 hrs per week, multiply by crew.length
     const p = this.props.projectInView;
     const weeksToCompletion = (Date.parse(p.dateInterconnection) - Date.parse(p.dateStartConstruction)) / 6.048e+8;
-    console.log(weeksToCompletion)
     return Math.floor(weeksToCompletion * 40 * this.props.crew.length);
   }
 

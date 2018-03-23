@@ -12,7 +12,7 @@ class ProjectTimeline extends Component {
     }
   }
 
-  formatDate = (date) => {
+  formatDate = date => {
     const d = new Date(date);
     const year = d.getFullYear();
     let month = '' + (d.getMonth() + 1);
@@ -37,7 +37,7 @@ class ProjectTimeline extends Component {
     return (
       <header className="milestone-header">
         <div className="milestone-container">
-        <span>Timeline</span>
+          <span>Timeline</span>
         </div>
         {
           data.map((set, index) =>

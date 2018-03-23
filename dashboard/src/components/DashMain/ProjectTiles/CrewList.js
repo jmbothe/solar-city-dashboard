@@ -1,50 +1,31 @@
 import React, { Component } from 'react';
+import CrewMemberCard from './CrewMemberCard';
 
 class CrewList extends Component {
-
-  handleClick = (id) => {
-    this.props.assignCrewMember(id);
-  }
   
   render() { 
     return (
       <section className="crew-list-tile">
       <div className="tile-heading">
-        <h3>Assigned Crew</h3>
+        <h3>{this.props.assignmentView ? 'Available Crew' : 'Assigned Crew'}</h3>
         </div>
         <div className="crew-toggle-container">
         <button
           onClick={this.props.toggleAssignmentView}
         >
-          View Available Crew
+          {this.props.assignmentView ? 'View Assigned Crew' : 'View Available Crew'}
         </button>
         </div>
         <div className="crew-list-wrapper">
           <ul className="crew-list">
             {this.props.crew.map(member =>
-              
-              <li
+              <CrewMemberCard
                 key={member.employeeId}
-                className="crew-list-item"
-              >
-                <div>
-                  {member.firstName} {member.lastName}
-                  <br/>
-                  {member.phoneNumber}
-                  <br/>
-                  {
-                    <a
-                      href={`mailto:${member.email}`}
-                      target="_blank" rel="noopener noreferrer"
-                      >
-                        {member.email}
-                    </a>
-                  }
-                  </div>
-                <div className="crew-list-item-button-wrapper">
-                  <button onClick={() => this.handleClick(member.employeeId)}>Remove</button>
-                </div>
-              </li>
+                member={member}
+                assignCrewMember={this.props.assignCrewMember}
+                assignmentView={this.props.assignmentView}
+                projectInView={this.props.projectInView}
+              />
             )}
           </ul>
         </div>

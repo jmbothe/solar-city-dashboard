@@ -1,30 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ProjectCrew from './ProjectCrew';
 import ProjectDetails from './ProjectDetails';
 import ProjectNotes from './ProjectNotes';
 
-class ProjectTiles extends Component {
-  state = {}
-  render() { 
-    return (
-      <section className="project-tiles">
-        <ProjectDetails
-          projectInView={this.props.projectInView}
-          crew={this.props.crew.filter(member => member.assignedTo == this.props.projectInView.projectId)}
-        />
-        <ProjectCrew
-          projectInView={this.props.projectInView}
-          crew={this.props.crew}
-          assignCrewMember={this.props.assignCrewMember}
-        />
-        <ProjectNotes
-          projectInView={this.props.projectInView}
-          updateNotes={this.props.updateNotes}
-          changeNotes={this.props.changeNotes}
-        />
-      </section>
-    )
-  }
-}
+const ProjectTiles = ({
+  projectInView,
+  crew,
+  assignCrewMember,
+  updateNotes,
+  changeNotes
+}) =>
+  <section className="project-tiles">
+    <ProjectDetails
+      projectInView={projectInView}
+      crew={crew.filter(member => member.assignedTo == projectInView.projectId)}
+    />
+    <ProjectCrew
+      projectInView={projectInView}
+      crew={crew}
+      assignCrewMember={assignCrewMember}
+    />
+    <ProjectNotes
+      projectInView={projectInView}
+      updateNotes={updateNotes}
+      changeNotes={changeNotes}
+    />
+  </section>
  
 export default ProjectTiles;
