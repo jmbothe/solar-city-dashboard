@@ -1,27 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class ProjectsList extends Component {
-  state = {}
-  render() { 
-    return (
-      <section>
-        <ul className="projects-list-ul">
-          {this.props.projects.map(project => {
-            return (
-              <li key={project.projectId}>
-              <button
-                onClick={() => this.props.changeProjectInView(project.projectId)}
-              >
-                <span>{project.client} {project.projectName}</span>
-                <span className="arrow">{this.props.projectInView == project ? '→' : '' }</span>
-              </button>
-              </li>
-            )
-          })}
-        </ul>
-      </section>
-    )
-  }
-}
- 
+const ProjectsList = ({projects, projectInView, changeProjectInView}) => 
+  <section>
+    <ul className="projects-list-ul">
+      {projects.map(project => 
+        <li key={project.projectId}>
+          <button
+            onClick={() => changeProjectInView(project.projectId)}
+          >
+            <span>{project.client} {project.projectName}</span>
+            <span className="arrow">{projectInView == project ? '→' : '' }</span>
+          </button>
+        </li>
+      )}
+    </ul>
+  </section>
+
 export default ProjectsList;

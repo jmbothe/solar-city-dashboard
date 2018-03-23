@@ -7,12 +7,8 @@ class DashSidebar extends Component {
     projectListView: false,
   }
 
-  enableProjectListView = () => {
-    this.setState({projectListView: true})
-  }
-
-  disableProjectListView = () => {
-    this.setState({projectListView: false})
+  toggleProjectListView = (boolean) => {
+    this.setState({projectListView: boolean});
   }
 
   render() {
@@ -31,13 +27,13 @@ class DashSidebar extends Component {
       <nav className="sidebar">
         <header>
           <div
-            onClick={this.disableProjectListView}
+            onClick={() => this.toggleProjectListView(false)}
             className={this.state.projectListView ? 'light-grey inset-shadow-left' : '' }
           >
             <h3>Core Team</h3>
           </div>
           <div
-            onClick={this.enableProjectListView}
+            onClick={() => this.toggleProjectListView(true)}
             className={this.state.projectListView ? '' : 'light-grey inset-shadow-right' }
           >
             <h3>Projects</h3>

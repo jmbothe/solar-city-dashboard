@@ -92,6 +92,9 @@ class Dashboard extends Component {
     })
   }
 
+  // TODO: Incorporrate POST and DELETE routes to front end.
+  // Those routes already exist on backend, but not being used here on the frontend
+
   render() {
     return !this.state.crew
       ? <div></div>
