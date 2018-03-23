@@ -1,6 +1,6 @@
 import React from 'react';
 import ProjectTiles from './ProjectTiles/ProjectTiles';
-import ProjectTimeline from './ProjectTimeline';
+import ProjectTimeline from './ProjectTimeline/ProjectTimeline';
 
 const ProjectView = ({
   projectInView,

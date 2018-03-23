@@ -1,5 +1,5 @@
 import React from 'react';
-import ManagementCard from './ManagementCard';
+import ManagementCard from './ManagementCard/ManagementCard';
 
 const RegionDetails = ({
   management:

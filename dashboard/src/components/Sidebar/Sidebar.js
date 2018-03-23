@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import RegionDetails from './RegionDetails';
-import ProjectsList from './ProjectsList';
+import RegionDetails from './RegionDetails/RegionDetails';
+import ProjectsList from './ProjectsList/ProjectsList';
 
 class DashSidebar extends Component {
   state = {

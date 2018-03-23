@@ -1,7 +1,7 @@
 import React from 'react';
-import ProjectCrew from './ProjectCrew';
-import ProjectDetails from './ProjectDetails';
-import ProjectNotes from './ProjectNotes';
+import ProjectCrew from './ProjectCrew/ProjectCrew';
+import ProjectDetails from './ProjectDetails/ProjectDetails';
+import ProjectNotes from './ProjectNotes/ProjectNotes';
 
 const ProjectTiles = ({
   projectInView,

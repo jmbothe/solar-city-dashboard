@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Main from './DashMain/Main';
-import Sidebar from './DashSidebar/Sidebar';
+import DashMain from './DashMain/DashMain';
+import Sidebar from './Sidebar/Sidebar';
 
 class Dashboard extends Component {
   state = {
@@ -30,7 +30,7 @@ class Dashboard extends Component {
   }
 
   // Add or Remove crew member to/from assigned job
-  assignCrewMember = async (id, projectId = null) => {
+  assignCrewMember = async (id, projectId) => {
     try {
       await fetch(`http://localhost:8080/employees/assign/${id}`, {
         method: 'PATCH',
@@ -112,7 +112,7 @@ class Dashboard extends Component {
               projectInView={this.state.projectInView}
               changeProjectInView={this.changeProjectInView}
             />
-            <Main
+            <DashMain
               projects={this.state.projects}
               projectInView={this.state.projectInView}
               crew={this.state.crew}
