@@ -58,20 +58,32 @@ services:
       - GRADLE_USER_HOME=cache
       - SPRING_PROFILES_ACTIVE=dev
 
+  # dashboard:
+  #   image: node:latest
+  #   build: ./dashboard
+  #   ports:
+  #     - 3000:3000
+  #   working_dir: /dashboard
+  #   volumes:
+  #     - ./dashboard:/dashboard
+  #   command: 'npm start'
+  #   depends_on:
+  #     - eureka
+  #     - postgresdev
+  #     - projects-api
+  #     - employees-api
+
   dashboard:
-    image: node:latest
     build: ./dashboard
     ports:
       - 3000:3000
-    working_dir: /dashboard
     volumes:
       - ./dashboard:/dashboard
-    command: 'npm start'
     depends_on:
       - eureka
       - postgresdev
       - projects-api
-      - employees-api 
+      - employees-api
 
   postgresdev:
     image: postgres
