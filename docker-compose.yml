@@ -81,7 +81,7 @@ services:
       - 3000:3000
     volumes:
       - ./dashboard/src:/dashboard/src
-      - ./dashboard/public:/dasboard/public
+      - ./dashboard/public:/dashboard/public
 
   postgresdev:
     image: postgres
